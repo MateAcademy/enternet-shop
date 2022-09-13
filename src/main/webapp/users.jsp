@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>All users</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <!--tr-строка  td-ячейка -->

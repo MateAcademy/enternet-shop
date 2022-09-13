@@ -9,12 +9,14 @@
 <html>
 <head>
     <title>Main</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 Welcome! Ypu can register if you want: <br>
-<a href="/register"> Регистрация </a> <br>
-<a href="/items"> Добавить товар в БД </a><br>
+<a href="/register"> Регистрация юзера </a> <br>
+<a href="/users"> Список всех юзеров </a> <br>
+<a href="/items"> Добавить товар в Базу Данных </a><br>
 <a href="/getAllItems"> Вывести весь товар </a>
 
 </body>

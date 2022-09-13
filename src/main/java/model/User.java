@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 /**
  * @author Sergey Klunniy
  */
@@ -18,12 +20,25 @@ public class User {
     private static Long index = 0L;
 
     public User(String email, String password) {
+        this.id = setId();
         this.email = email;
         this.password = password;
     }
 
-    private void setId() {
-        id = ++index;
+    private Long setId() {
+        return ++index;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
+    }
 }

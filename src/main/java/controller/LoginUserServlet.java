@@ -14,8 +14,8 @@ import java.io.IOException;
 /**
  * @author Sergey Klunniy
  */
-@WebServlet(value = "/enter")
-public class EnterUserServlet extends HttpServlet {
+@WebServlet(value = "/login")
+public class LoginUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,10 +38,8 @@ public class EnterUserServlet extends HttpServlet {
         } else {
             String error = "Вы ввели неправильные данные!";
             req.setAttribute("error", error);
-//            resp.sendRedirect("/index.jsp");
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
-
     }
 
 }

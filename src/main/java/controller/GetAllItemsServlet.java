@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author Sergey Klunniy
  */
 @WebServlet(value = "/getAllItems")
-public class ItemsGetAllServlet extends HttpServlet {
+public class GetAllItemsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);

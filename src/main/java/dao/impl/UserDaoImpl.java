@@ -11,10 +11,24 @@ import java.util.List;
  */
 public class  UserDaoImpl implements UserDao {
 
-    private static List<User> userList = new ArrayList<>();
+    private static volatile List<User> userList;
 
     static {
+        getInstance();
         userList.add(new User("s.klunniy@gmail.com", "123"));
+    }
+
+    public static List<User> getInstance() {
+        List<User> localInstance = userList;
+        if (localInstance == null) {
+            synchronized (ArrayList.class) {
+                localInstance = userList;
+                if (localInstance == null) {
+                    userList = localInstance = new ArrayList<>();
+                }
+            }
+        }
+        return localInstance;
     }
 
     @Override

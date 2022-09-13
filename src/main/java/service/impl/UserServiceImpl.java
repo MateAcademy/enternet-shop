@@ -14,16 +14,35 @@ public class UserServiceImpl implements UserService {
 
     //сделать синглтон
     //сделать что бы не нужно было повторно вводить емейл
-    private static final UserDao userDao = new UserDaoImpl();
+    private static volatile UserDao userDao;
+
+    /**
+     * @return singleton userDao;
+     */
+    public static UserDao getInstance() {
+        UserDao localInstance = userDao;
+        if (localInstance == null) {
+            synchronized (UserDao.class) {
+                localInstance = userDao;
+                if (localInstance == null) {
+                    userDao = localInstance = new UserDaoImpl();
+                }
+            }
+        }
+        return localInstance;
+    }
+
+    static {
+        getInstance();
+    }
+
 
     @Override
     public void addUser(User user) {
         if (user!=null) {
             userDao.addUser(user);
         }
-        //какую то валидацию сделать
         //что то залогировать
-        
     }
 
     @Override

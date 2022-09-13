@@ -5,7 +5,6 @@ import service.UserService;
 import service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import java.util.Objects;
  * @author Sergey Klunniy
  */
 //@WebServlet(value = "/register", loadOnStartup = 1)
-public class UserRegistrationServlet extends HttpServlet {
+public class RegistrationUserServlet extends HttpServlet {
 
     static {
         System.out.println("Test");
