@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ItemDao;
+import db.Database;
 import model.Item;
 
 import java.util.ArrayList;
@@ -11,17 +12,17 @@ import java.util.List;
  */
 public class ItemDaoImpl implements ItemDao {
 
-    private final static List<Item> listItems = new ArrayList<>();
+
 
     @Override
     public void addItem(Item item) {
         if (item!=null) {
-            listItems.add(item);
+            Database.listItems.add(item);
         }
     }
 
     @Override
     public List<Item> getAll() {
-        return listItems;
+        return Database.listItems;
     }
 }

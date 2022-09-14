@@ -1,5 +1,6 @@
 package controller;
 
+import factory.UserServiceFactory;
 import model.User;
 import service.UserService;
 import service.impl.UserServiceImpl;
@@ -19,7 +20,7 @@ import java.util.List;
 public class GetAllUsersServlet extends HttpServlet {
 
     //сделать фабрику синглтоном
-    private static final UserService userService = new UserServiceImpl();
+    private static final UserService userService = UserServiceFactory.getUserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

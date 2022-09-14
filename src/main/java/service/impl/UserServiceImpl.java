@@ -1,8 +1,8 @@
 package service.impl;
 
 import dao.UserDao;
-import dao.impl.UserDaoImpl;
 import model.User;
+import factory.UserDAOFactory;
 import service.UserService;
 
 import java.util.List;
@@ -12,30 +12,9 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
 
-    //сделать синглтон
     //сделать что бы не нужно было повторно вводить емейл
-    private static volatile UserDao userDao;
-
-    /**
-     * @return singleton userDao;
-     */
-    public static UserDao getInstance() {
-        UserDao localInstance = userDao;
-        if (localInstance == null) {
-            synchronized (UserDao.class) {
-                localInstance = userDao;
-                if (localInstance == null) {
-                    userDao = localInstance = new UserDaoImpl();
-                }
-            }
-        }
-        return localInstance;
-    }
-
-    static {
-        getInstance();
-    }
-
+//    private static final volatile UserDao userDao = UserDAOFactory.getUserDao();
+    private static final UserDao userDao = UserDAOFactory.getUserDao();
 
     @Override
     public void addUser(User user) {

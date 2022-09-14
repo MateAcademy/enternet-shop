@@ -1,5 +1,6 @@
 package controller;
 
+import factory.UserServiceFactory;
 import model.User;
 import service.UserService;
 import service.impl.UserServiceImpl;
@@ -15,11 +16,9 @@ import java.util.Objects;
  * @author Sergey Klunniy
  */
 //@WebServlet(value = "/register", loadOnStartup = 1)
-public class RegistrationUserServlet extends HttpServlet {
+public class UserRegistrationServlet extends HttpServlet {
 
-    static {
-        System.out.println("Test");
-    }
+    private static final UserService userService = UserServiceFactory.getUserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +36,7 @@ public class RegistrationUserServlet extends HttpServlet {
             req.setAttribute("error", null);
             User user = new User(1L, email, password);
             System.out.println("Кладем юзера в бд");
-            UserService userService = new UserServiceImpl();
+
             userService.addUser(user);
             resp.sendRedirect("/");
         } else {
