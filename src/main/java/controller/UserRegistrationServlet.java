@@ -38,7 +38,7 @@ public class UserRegistrationServlet extends HttpServlet {
             System.out.println("Кладем юзера в бд");
 
             userService.addUser(user);
-            resp.sendRedirect("/");
+            resp.sendRedirect("/users");
         } else {
             req.setAttribute("error", "Your password no equals");
             //resp.sendRedirect("/register.jsp");

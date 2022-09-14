@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<a href="/"> На страницу входа </a> <br>
 Welcome! Ypu can register if you want: <br>
 <a href="/register"> Регистрация юзера </a> <br>
 <a href="/users"> Список всех юзеров </a> <br>
-<a href="/items"> Добавить товар в Базу Данных </a><br>
+<a href="/itemsAdd"> Добавить товар в Базу Данных </a><br>
 <a href="/getAllItems"> Вывести весь товар </a>
 
 </body>

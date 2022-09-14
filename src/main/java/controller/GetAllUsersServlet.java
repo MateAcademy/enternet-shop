@@ -23,6 +23,11 @@ public class GetAllUsersServlet extends HttpServlet {
     private static final UserService userService = UserServiceFactory.getUserService();
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> allUsers = userService.getAll();
         req.setAttribute("allUsers", allUsers);

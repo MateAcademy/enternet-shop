@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.UserDao;
 import model.User;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public class  UserDaoImpl implements UserDao {
 
+    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
     private static volatile List<User> userList;
 
     static {
@@ -34,6 +36,7 @@ public class  UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
         userList.add(user);
+        logger.info("");
     }
 
     @Override

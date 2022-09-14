@@ -32,9 +32,9 @@ public class ItemAddServlet extends HttpServlet {
             ItemService itemService = new ItemServiceImpl();
             itemService.addItem(new Item(name, priceDouble, description));
 
-            resp.sendRedirect("/");
+            resp.sendRedirect("/main.jsp");
         } catch (Exception ex) {
-            //Вывести на страничку что не правильно ввели инфу о товаре!
+            //Вывести на страничку если такой товар уже есть то ввести заново другой:
         }
 
     }

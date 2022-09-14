@@ -12,8 +12,6 @@ import java.util.List;
  */
 public class ItemDaoImpl implements ItemDao {
 
-
-
     @Override
     public void addItem(Item item) {
         if (item!=null) {

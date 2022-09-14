@@ -7,8 +7,7 @@
 --%>
 
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>register</title>
@@ -18,7 +17,7 @@
 
 <%--<c:set var="test" value="TestVariable"/>--%>
 <%--<c:out value="${error}">Fail</c:out>--%>
-
+<a href="/main.jsp"> Назад </a> <br>
 <center>
     <h4>
       <%

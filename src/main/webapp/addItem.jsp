@@ -13,10 +13,10 @@
 </head>
 <body>
 
-
+<a href="/main.jsp"> Назад </a> <br>
 <center>
     Page add items:
-    <form action="/items" method="post">
+    <form action="/itemsAdd" method="post">
         Название товара <input name="name" type="text"> <br>
         Цена <input name="price" type="text"> <br>
         Описание <input name="description" type="text"> <br>

@@ -20,7 +20,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ItemServlet</servlet-name>
-    <url-pattern>/items</url-pattern>
+    <url-pattern>/itemsAdd</url-pattern>
   </servlet-mapping>
 
 </web-app>

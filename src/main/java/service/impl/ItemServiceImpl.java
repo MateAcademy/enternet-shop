@@ -4,6 +4,7 @@ import dao.ItemDao;
 import dao.UserDao;
 import dao.impl.ItemDaoImpl;
 import dao.impl.UserDaoImpl;
+import factory.ItemDaoFactory;
 import model.Item;
 import service.ItemService;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class ItemServiceImpl implements ItemService {
 
-    private static final ItemDao itemDao = new ItemDaoImpl();
+    private static final ItemDao itemDao = ItemDaoFactory.getItemDao();
 
     @Override
     public void addItem(Item item) {

@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<a href="/main.jsp"> Назад </a> <br>
+<a href="/register.jsp"> Регистрация нового пользователя </a> <br>
 <!--tr-строка  td-ячейка -->
 <table>
     <%
