@@ -1,14 +1,12 @@
 package factory;
 
 import dao.ItemDao;
-import dao.UserDao;
-import dao.impl.ItemDaoImpl;
-import dao.impl.UserDaoImpl;
+import dao.impl.ProductDaoImpl;
 
 /**
  * @author Sergey Klunniy
  */
-public class ItemDaoFactory {
+public class ProductDaoFactory {
     private static volatile ItemDao itemDao;
 
     static {
@@ -24,7 +22,7 @@ public class ItemDaoFactory {
             synchronized (ItemDao.class) {
                 localInstance = itemDao;
                 if (localInstance == null) {
-                    itemDao = localInstance = new ItemDaoImpl();
+                    itemDao = localInstance = new ProductDaoImpl();
                 }
             }
         }

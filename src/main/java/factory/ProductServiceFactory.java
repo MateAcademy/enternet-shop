@@ -1,14 +1,12 @@
 package factory;
 
 import service.ItemService;
-import service.UserService;
 import service.impl.ItemServiceImpl;
-import service.impl.UserServiceImpl;
 
 /**
  * @author Sergey Klunniy
  */
-public class ItemServiceFactory {
+public class ProductServiceFactory {
     private static volatile ItemService itemService;
 
     static {

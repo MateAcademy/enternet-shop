@@ -1,5 +1,5 @@
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="model.Item" %>
+<%@ page import="model.Product" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sergey
@@ -32,12 +32,12 @@
                 "        <th>Цена</th>\n" +
                 "    </tr>");
 
-        List<Item> allItems = (List<Item>) request.getAttribute("allItems");
-        for (Item item : allItems) {
+        List<Product> allProducts = (List<Product>) request.getAttribute("allProducts");
+        for (Product product : allProducts) {
             printWriter.write("<tr>");
-            printWriter.write("<td>" + item.getName() + "</td>" );
-            printWriter.write("<td>" + item.getDescription()+ "</td>" );
-            printWriter.write("<td>" + item.getPrice() + "</td>" );
+            printWriter.write("<td>" + product.getName() + "</td>" );
+            printWriter.write("<td>" + product.getDescription()+ "</td>" );
+            printWriter.write("<td>" + product.getPrice() + "</td>" );
             printWriter.write("</tr>");
         }
 

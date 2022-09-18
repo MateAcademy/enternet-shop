@@ -1,6 +1,6 @@
 package controller;
 
-import model.Item;
+import model.Product;
 import service.ItemService;
 import service.impl.ItemServiceImpl;
 
@@ -30,7 +30,7 @@ public class ItemAddServlet extends HttpServlet {
             Double priceDouble = Double.parseDouble(price);
 //Todo:
             ItemService itemService = new ItemServiceImpl();
-            itemService.addItem(new Item(name, priceDouble, description));
+            itemService.addItem(new Product(name, priceDouble, description));
 
             resp.sendRedirect("/getItems");
         } catch (Exception ex) {

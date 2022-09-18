@@ -1,6 +1,7 @@
 package dao;
 
-import model.Item;
+import model.Product;
+
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public interface ItemDao {
 
-    void addItem(Item item);
-    List<Item> getAll();
+    void addItem(Product product);
+    List<Product> getAll();
 
 }

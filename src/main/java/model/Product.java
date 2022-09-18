@@ -12,7 +12,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Product {
 
     //id по товару
     private Long id;
@@ -21,7 +21,7 @@ public class Item {
     private String description;
     private static Long index = 0L;
 
-    public Item(String name, Double price, String description) {
+    public Product(String name, Double price, String description) {
         this.id = setId();
         this.name = name;
         this.price = price;
@@ -36,8 +36,8 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return name.equals(item.name) && price.equals(item.price) && description.equals(item.description);
+        Product product = (Product) o;
+        return name.equals(product.name) && price.equals(product.price) && description.equals(product.description);
     }
 
     @Override

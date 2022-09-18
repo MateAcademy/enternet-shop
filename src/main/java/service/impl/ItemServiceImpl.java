@@ -1,11 +1,8 @@
 package service.impl;
 
 import dao.ItemDao;
-import dao.UserDao;
-import dao.impl.ItemDaoImpl;
-import dao.impl.UserDaoImpl;
-import factory.ItemDaoFactory;
-import model.Item;
+import factory.ProductDaoFactory;
+import model.Product;
 import service.ItemService;
 
 import java.util.List;
@@ -15,17 +12,17 @@ import java.util.List;
  */
 public class ItemServiceImpl implements ItemService {
 
-    private static final ItemDao itemDao = ItemDaoFactory.getItemDao();
+    private static final ItemDao itemDao = ProductDaoFactory.getItemDao();
 
     @Override
-    public void addItem(Item item) {
-        if (item!=null) {
-            itemDao.addItem(item);
+    public void addItem(Product product) {
+        if (product !=null) {
+            itemDao.addItem(product);
         }
     }
 
     @Override
-    public List<Item> getAll() {
+    public List<Product> getAll() {
         return itemDao.getAll();
     }
 }
