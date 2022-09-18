@@ -36,13 +36,12 @@ public class UserRegistrationServlet extends HttpServlet {
             req.setAttribute("error", null);
             User user = new User(1L, email, password);
             System.out.println("Кладем юзера в бд");
-
             userService.addUser(user);
             resp.sendRedirect("/users");
         } else {
             req.setAttribute("error", "Your password no equals");
             //resp.sendRedirect("/register.jsp");
-            req.getRequestDispatcher("register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
 
     }

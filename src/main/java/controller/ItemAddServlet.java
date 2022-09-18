@@ -28,11 +28,11 @@ public class ItemAddServlet extends HttpServlet {
             String description = req.getParameter("description");
 
             Double priceDouble = Double.parseDouble(price);
-
+//Todo:
             ItemService itemService = new ItemServiceImpl();
             itemService.addItem(new Item(name, priceDouble, description));
 
-            resp.sendRedirect("/main.jsp");
+            resp.sendRedirect("/getItems");
         } catch (Exception ex) {
             //Вывести на страничку если такой товар уже есть то ввести заново другой:
         }

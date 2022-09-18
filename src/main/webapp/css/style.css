@@ -3,6 +3,7 @@ body {
     background-image: url('/img/background.jpg');
     text-align: center;
     font-size: 32px;
+    background-size: 100% ;
 }
 button {
     font-family: Brush Script MT, Brush Script Std, cursive;

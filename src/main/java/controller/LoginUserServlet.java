@@ -2,6 +2,7 @@ package controller;
 
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
+import factory.UserDAOFactory;
 import model.User;
 
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import java.io.IOException;
 @WebServlet(value = "/login")
 public class LoginUserServlet extends HttpServlet {
 
+    private static final UserDao userDao = UserDAOFactory.getUserDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -31,7 +33,7 @@ public class LoginUserServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = new User(email, password);
-        UserDao userDao = new UserDaoImpl();
+
         boolean isUserInDB = userDao.findUser(user);
         if (isUserInDB) {
             resp.sendRedirect("/main.jsp");

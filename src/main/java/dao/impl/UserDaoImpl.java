@@ -17,10 +17,12 @@ public class  UserDaoImpl implements UserDao {
 
     static {
         getInstance();
-        userList.add(new User("s.klunniy@gmail.com", "123"));
+        User user = new User("s.klunniy@gmail.com", "123");
+        userList.add(user);
+        logger.debug("User" + user + " add to db");
     }
 
-    public static List<User> getInstance() {
+    public static List<User> getInstance( ) {
         List<User> localInstance = userList;
         if (localInstance == null) {
             synchronized (ArrayList.class) {
@@ -36,7 +38,7 @@ public class  UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
         userList.add(user);
-        logger.info("");
+        logger.debug("User" + user + " add to db");
     }
 
     @Override

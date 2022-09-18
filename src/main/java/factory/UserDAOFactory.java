@@ -8,6 +8,9 @@ import dao.impl.UserDaoImpl;
  */
 public class UserDAOFactory {
 
+    private UserDAOFactory() {
+    }
+
     private static volatile UserDao userDao;
 
     static {
@@ -17,7 +20,7 @@ public class UserDAOFactory {
         return userDao;
     }
 
-    private static UserDao getInstance() {
+    private static synchronized UserDao getInstance() {
         UserDao localInstance = userDao;
         if (localInstance == null) {
             synchronized (UserDao.class) {

@@ -21,7 +21,7 @@ public class ItemDaoFactory {
     private static ItemDao getInstance() {
         ItemDao localInstance = itemDao;
         if (localInstance == null) {
-            synchronized (UserDao.class) {
+            synchronized (ItemDao.class) {
                 localInstance = itemDao;
                 if (localInstance == null) {
                     itemDao = localInstance = new ItemDaoImpl();
