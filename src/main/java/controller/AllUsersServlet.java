@@ -17,7 +17,7 @@ import java.util.List;
  * @author Sergey Klunniy
  */
 @WebServlet(value = "/users")
-public class GetAllUsersServlet extends HttpServlet {
+public class AllUsersServlet extends HttpServlet {
 
     //сделать фабрику синглтоном
     private static final UserService userService = UserServiceFactory.getUserService();

@@ -16,7 +16,7 @@ import java.util.List;
  * @author Sergey Klunniy
  */
 @WebServlet(value = "/getItems")
-public class GetAllItemsServlet extends HttpServlet {
+public class AllProductsServlet extends HttpServlet {
 
     private static final ItemService itemService = ProductServiceFactory.getItemService();
     @Override

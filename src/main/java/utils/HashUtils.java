@@ -2,10 +2,16 @@ package utils;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.*;
+import java.security.spec.EncodedKeySpec;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 import org.apache.soap.encoding.Hex;
@@ -36,7 +42,7 @@ public class HashUtils {
             byte[] encrypted = cipher.doFinal(text.getBytes());
             return Hex.encode(encrypted);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                 NoSuchPaddingException var5) {
+                NoSuchPaddingException var5) {
             throw new SecurityException(var5);
         }
     }
@@ -49,7 +55,7 @@ public class HashUtils {
             byte[] toDecode = Hex.decode(hexText);
             return new String(cipher.doFinal(toDecode));
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                 NoSuchPaddingException var5) {
+                NoSuchPaddingException var5) {
             throw new SecurityException(var5);
         }
     }
@@ -60,7 +66,7 @@ public class HashUtils {
             cipher.init(1, key);
             return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                 NoSuchPaddingException var3) {
+                NoSuchPaddingException var3) {
             throw new SecurityException(var3);
         }
     }
@@ -71,7 +77,7 @@ public class HashUtils {
             cipher.init(2, key);
             return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                 NoSuchPaddingException var3) {
+                NoSuchPaddingException var3) {
             throw new SecurityException(var3);
         }
     }
@@ -84,4 +90,39 @@ public class HashUtils {
         private Algorithm() {
         }
     }
+
+
+    public static void myDecryptToCCMTAFileEmail() throws SecurityException {
+
+        try {
+            /**
+             * повертаэмо вміст ключа:
+             */
+            File publicKeyFile = new File("certificate.pem");
+            byte[] publicKeyBytes = Files.readAllBytes(publicKeyFile.toPath());
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
+            PrivateKey privateKey = keyFactory.generatePrivate(publicKeySpec);
+
+            /**
+             * Дешифрування файлу
+             */
+            Path tempFile = Files.createTempFile("temp", "txt");
+            File file = new File("smime.p7m");
+            byte[] encryptedFileBytes = Files.readAllBytes(file.toPath());
+            Cipher decryptCipher = Cipher.getInstance("RSA");
+            decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
+            byte[] decryptedFileBytes = decryptCipher.doFinal(encryptedFileBytes);
+            try (FileOutputStream stream = new FileOutputStream(tempFile.toFile())) {
+                stream.write(decryptedFileBytes);
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException | IOException | InvalidKeySpecException var3) {
+            throw new SecurityException(var3);
+        }
+    }
+
+    public static void main(String[] args) {
+        myDecryptToCCMTAFileEmail();
+    }
+
 }

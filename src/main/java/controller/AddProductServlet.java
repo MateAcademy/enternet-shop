@@ -14,10 +14,10 @@ import java.io.IOException;
  * @author Sergey Klunniy
  */
 
-public class ItemAddServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addItem.jsp").forward(req, resp);
+        req.getRequestDispatcher("/add_product.jsp").forward(req, resp);
     }
 
     @Override

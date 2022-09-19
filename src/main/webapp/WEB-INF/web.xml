@@ -16,7 +16,7 @@
 
   <servlet>
     <servlet-name>ItemServlet</servlet-name>
-    <servlet-class>controller.ItemAddServlet</servlet-class>
+    <servlet-class>controller.AddProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ItemServlet</servlet-name>
