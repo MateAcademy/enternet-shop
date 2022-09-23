@@ -45,5 +45,15 @@
     %>
 </table>
 
+<table>
+    <c:forEach var="element" items="${productList}" >
+      <tr>
+          <td>  <c:out value="${element.id}"/><p></td>
+          <td>  <c:out value="${element.name}"/><p></td>
+
+      </tr>>
+    </c:forEach>
+</table>
+
 </body>
 </html>
