@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<a href="/main.jsp"> Назад </a> <br>
+<a href="/main_menu.jsp"> Назад </a> <br>
 <a href="/add_product.jsp"> Регистрация нового товара </a> <br>
 <!--tr-строка  td-ячейка -->
 <table>
@@ -45,15 +45,15 @@
     %>
 </table>
 
-<table>
-    <c:forEach var="element" items="${productList}" >
-      <tr>
-          <td>  <c:out value="${element.id}"/><p></td>
-          <td>  <c:out value="${element.name}"/><p></td>
+<%--<table>--%>
+<%--    <c:forEach var="element" items="${productList}" >--%>
+<%--      <tr>--%>
+<%--          <td>  <c:out value="${element.id}"/><p></td>--%>
+<%--          <td>  <c:out value="${element.name}"/><p></td>--%>
 
-      </tr>>
-    </c:forEach>
-</table>
+<%--      </tr>>--%>
+<%--    </c:forEach>--%>
+<%--</table>--%>
 
 </body>
 </html>

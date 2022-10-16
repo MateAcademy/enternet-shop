@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author Sergey Klunniy
  */
-@WebServlet(value = "/users")
+@WebServlet(value = "/admin/users")
 public class AllUsersServlet extends HttpServlet {
 
     //сделать фабрику синглтоном
@@ -30,7 +30,9 @@ public class AllUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> allUsers = userService.getAll();
-        req.setAttribute("allUsers", allUsers);
-        req.getRequestDispatcher("/users.jsp").forward(req, resp);
+            req.setAttribute("allUsers", allUsers);
+            req.getRequestDispatcher("/show_all_users.jsp").forward(req, resp);
+
+
     }
 }

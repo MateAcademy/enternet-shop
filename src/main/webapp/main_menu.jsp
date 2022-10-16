@@ -14,10 +14,10 @@
 <body>
 <a href="/"> На страницу входа </a> <br>
 Welcome! Ypu can register if you want: <br>
-<a href="/register"> Регистрация юзера </a> <br>
-<a href="/users"> Список всех юзеров </a> <br>
-<a href="/itemsAdd"> Добавить товар в Базу Данных </a><br>
-<a href="/getAllItems"> Вывести весь товар </a>
+<a href="/admin/register"> Регистрация юзера </a> <br>
+<a href="/admin/users"> Список всех юзеров </a> <br>
+<a href="/addProducts"> Добавить товар в Базу Данных </a><br>
+<a href="/getAllProducts"> Вывести весь товар </a>
 
 </body>
 </html>

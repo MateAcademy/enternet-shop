@@ -15,10 +15,10 @@
 </head>
 <body>
 
-<a href="/main.jsp"> Назад </a> <br>
+<a href="/main_menu.jsp"> Назад </a> <br>
 <center>
     Page add items:
-    <form action="/itemsAdd" method="post">
+    <form action="/addProducts" method="post">
         Название товара <input name="name" type="text"> <br>
         Цена <input name="price" type="text"> <br>
         Описание <input name="description" type="text"> <br>
@@ -27,24 +27,24 @@
     </form>
 </center>
 
-<%
-    PrintWriter printWriter = response.getWriter();
-    printWriter.write("<table border=\"1\">\n" +
-            "<tr>\n" +
-            "<th>Name</th>\n" +
-            "<th>Description</th>\n" +
-            "<th>Price</th>\n" +
-            "</tr>");
-    List<Product> productList = (List<Product>) request.getAttribute("productList");
-    for(Product product : productList) {
-        printWriter.write("<tr>");
-        printWriter.write("<td>" + product.getName() + "</td>");
-        printWriter.write("<td>" + product.getDescription() + "</td>");
-        printWriter.write("<td>" + product.getPrice() + "</td>");
-        printWriter.write("</tr>");
-    }
-    printWriter.write("</table>");
-%>
+<%--<%--%>
+<%--    PrintWriter printWriter = response.getWriter();--%>
+<%--    printWriter.write("<table border=\"1\">\n" +--%>
+<%--            "<tr>\n" +--%>
+<%--            "<th>Name</th>\n" +--%>
+<%--            "<th>Description</th>\n" +--%>
+<%--            "<th>Price</th>\n" +--%>
+<%--            "</tr>");--%>
+<%--    List<Product> productList = (List<Product>) request.getAttribute("productList");--%>
+<%--    for(Product product : productList) {--%>
+<%--        printWriter.write("<tr>");--%>
+<%--        printWriter.write("<td>" + product.getName() + "</td>");--%>
+<%--        printWriter.write("<td>" + product.getDescription() + "</td>");--%>
+<%--        printWriter.write("<td>" + product.getPrice() + "</td>");--%>
+<%--        printWriter.write("</tr>");--%>
+<%--    }--%>
+<%--    printWriter.write("</table>");--%>
+<%--%>--%>
 
 </body>
 </html>

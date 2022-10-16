@@ -17,7 +17,7 @@
 
 <%--<c:set var="test" value="TestVariable"/>--%>
 <%--<c:out value="${error}">Fail</c:out>--%>
-<a href="/main.jsp"> Назад </a> <br>
+<a href="/main_menu.jsp"> Назад </a> <br>
 <center>
     <h4>
       <%
@@ -25,10 +25,10 @@
           if (error!=null) {
               response.getWriter().write(error);
           }
-      %>
+      %> <br>
     </h4>
 
-    <form action="/register" method="post">
+    <form action="/admin/register" method="post">
         Email <input name="email" type="email"> <br>
         password <input name="password" type="password"> <br>
         repeat password <input name="repeatPassword" type="password"> <br>

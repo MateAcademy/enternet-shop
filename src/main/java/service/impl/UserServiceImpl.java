@@ -6,6 +6,7 @@ import factory.UserDAOFactory;
 import service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Sergey Klunniy
@@ -27,5 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userDao.getAll();
+    }
+
+    @Override
+    public Optional<User> findUserByLoginPassword(String email, String password) {
+        return userDao.findUserByLoginPassword(email, password);
     }
 }

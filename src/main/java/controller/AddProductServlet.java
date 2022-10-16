@@ -15,6 +15,9 @@ import java.io.IOException;
  */
 
 public class AddProductServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/add_product.jsp").forward(req, resp);
@@ -28,12 +31,13 @@ public class AddProductServlet extends HttpServlet {
             String description = req.getParameter("description");
 
             Double priceDouble = Double.parseDouble(price);
-//Todo:
+
             ItemService itemService = new ItemServiceImpl();
             itemService.addItem(new Product(name, priceDouble, description));
 
-            resp.sendRedirect("/getItems");
+            resp.sendRedirect("/getAllProducts");
         } catch (Exception ex) {
+//Todo: если ввожу логин и один пароль
             //Вывести на страничку если такой товар уже есть то ввести заново другой:
         }
 

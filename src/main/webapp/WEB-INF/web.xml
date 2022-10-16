@@ -11,7 +11,7 @@
 
   <servlet-mapping>
     <servlet-name>UserRegistrationServlet</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <url-pattern>/admin/register</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -20,7 +20,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ItemServlet</servlet-name>
-    <url-pattern>/itemsAdd</url-pattern>
+    <url-pattern>/addProducts</url-pattern>
   </servlet-mapping>
 
 </web-app>

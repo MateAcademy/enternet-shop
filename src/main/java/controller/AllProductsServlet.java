@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * @author Sergey Klunniy
  */
-@WebServlet(value = "/getItems")
-public class AllProductsServlet extends HttpServlet {
+@WebServlet(value = "/getAllProducts")
+public class  AllProductsServlet extends HttpServlet {
 
     private static final ItemService itemService = ProductServiceFactory.getItemService();
     @Override
@@ -27,8 +27,8 @@ public class AllProductsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> allProducts = itemService.getAll();
-        req.setAttribute("allItems", allProducts);
-        req.getRequestDispatcher("/items.jsp").forward(req, resp);
+        req.setAttribute("allProducts", allProducts);
+        req.getRequestDispatcher("/show_all_products.jsp").forward(req, resp);
     }
 
 

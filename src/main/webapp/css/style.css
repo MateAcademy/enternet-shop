@@ -3,18 +3,21 @@ body {
     background-image: url('/img/background.jpg');
     text-align: center;
     font-size: 32px;
-    background-size: 100% ;
+    background-size: 100%;
 }
+
 button {
     font-family: Brush Script MT, Brush Script Std, cursive;
     border-size: 30px;
     border-radius: 4px;
     font-size: 18px;
 }
+
 button:hover {
     background-color: #4CAF50; /* Green */
     color: green;
 }
+
 #differentPassword {
     color: red;
 }

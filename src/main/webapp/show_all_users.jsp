@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<a href="/main.jsp"> Назад </a> <br>
-<a href="/register.jsp"> Регистрация нового пользователя </a> <br>
+<a href="/main_menu.jsp"> Назад </a> <br>
+<a href="/add_user.jsp"> Регистрация нового пользователя </a> <br>
 <!--tr-строка  td-ячейка -->
 <table>
     <%

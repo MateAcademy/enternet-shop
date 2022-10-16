@@ -7,15 +7,14 @@ import model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * @author Sergey Klunniy
  */
-@WebServlet(value = "/login")
+@WebServlet("/login")
 public class LoginUserServlet extends HttpServlet {
 
     private static final UserDao userDao = UserDAOFactory.getUserDao();
@@ -27,21 +26,26 @@ public class LoginUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //todo: как мне сделать при возврате на главную страницу что бы убралось поле
+//мы сразу можем перейти на main_menu.jsp - а так не должно быть
         req.setAttribute("error", null);
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = new User(email, password);
+        Optional<User> optUserByLoginPassword = userDao.findUserByLoginPassword(email, password);
 
-        boolean isUserInDB = userDao.findUser(user);
-        if (isUserInDB) {
-            resp.sendRedirect("/main.jsp");
+        if (optUserByLoginPassword.isPresent()) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", optUserByLoginPassword.get());
+            resp.addCookie(new Cookie("adminTE", "TE"));
+            req.getRequestDispatcher("/main_menu.jsp").forward(req, resp);
+//            resp.sendRedirect("/main_menu.jsp");
         } else {
-            String error = "Вы ввели неправильные данные!";
+            String error = "Ваш логин и пароль неверный!";
             req.setAttribute("error", error);
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
+
     }
 
 }

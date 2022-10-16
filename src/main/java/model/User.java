@@ -17,6 +17,8 @@ public class User {
     private String email;
     private String password;
 
+    private String role;
+
     private static Long index = 0L;
 
     public User(String email, String password) {
@@ -40,5 +42,19 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(email, password);
+    }
+
+    public User(String email, String password, String role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
