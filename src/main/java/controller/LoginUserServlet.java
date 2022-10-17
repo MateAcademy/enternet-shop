@@ -20,7 +20,7 @@ public class LoginUserServlet extends HttpServlet {
     private static final UserDao userDao = UserDAOFactory.getUserDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class LoginUserServlet extends HttpServlet {
         if (optUserByLoginPassword.isPresent()) {
             HttpSession session = req.getSession();
             session.setAttribute("user", optUserByLoginPassword.get());
-            resp.addCookie(new Cookie("adminTE", "TE"));
+//            resp.addCookie(new Cookie("adminTE", "TE"));
             req.getRequestDispatcher("/main_menu.jsp").forward(req, resp);
 //            resp.sendRedirect("/main_menu.jsp");
         } else {

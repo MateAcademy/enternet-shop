@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>index</title>
- <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 <center>
     <h4>
@@ -16,16 +16,15 @@
         %>
     </h4>
 
-    <div class="login-box">
-    Вход на сайт:
+    <h2>Login</h2>
     <form action="/login" method="post">
-        <div class="user-box">Введите email: <input name="email" type="text"> </div> <br>
-        <div class="user-box">Введите password: <input name="password" type="password"> </div><br>
-        <button type="submit"> Enter</button> <br>
+        Введите email: <input name="email" type="text"> <br>
+        Введите password: <input name="password" type="password"> <br>
+        <button type="submit">
+            Enter
+        </button>
+        <br>
     </form>
-    </div>
-
-
 
 
 </center>
