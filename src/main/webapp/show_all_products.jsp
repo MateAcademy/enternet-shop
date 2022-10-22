@@ -12,38 +12,38 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>All users</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>All products</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <a href="/main_menu.jsp"> Назад </a> <br>
 <a href="/add_product.jsp"> Регистрация нового товара </a> <br>
 <!--tr-строка  td-ячейка -->
-<table>
-    <%
-        PrintWriter printWriter = response.getWriter();
-        printWriter.write("<center>");
-        printWriter.write("<h2> Список товара: </h2>");
-        printWriter.write("<table border=\"1\">\n" +
-                "    <tr>\n" +
-                "        <th>Название товара</th>\n" +
-                "        <th>Описание</th>\n" +
-                "        <th>Цена</th>\n" +
-                "    </tr>");
+<%--<table>--%>
+<%--    <%--%>
+<%--        PrintWriter printWriter = response.getWriter();--%>
+<%--        printWriter.write("<center>");--%>
+<%--        printWriter.write("<h2> Список товаров: </h2>");--%>
+<%--        printWriter.write("<table border=\"1\">\n" +--%>
+<%--                "    <tr>\n" +--%>
+<%--                "        <th>Название товара</th>\n" +--%>
+<%--                "        <th>Описание</th>\n" +--%>
+<%--                "        <th>Цена</th>\n" +--%>
+<%--                "    </tr>");--%>
 
-        List<Product> allProducts = (List<Product>) request.getAttribute("allProducts");
-        for (Product product : allProducts) {
-            printWriter.write("<tr>");
-            printWriter.write("<td>" + product.getName() + "</td>" );
-            printWriter.write("<td>" + product.getDescription()+ "</td>" );
-            printWriter.write("<td>" + product.getPrice() + "</td>" );
-            printWriter.write("</tr>");
-        }
+<%--        List<Product> allProducts = (List<Product>) request.getAttribute("allProducts");--%>
+<%--        for (Product product : allProducts) {--%>
+<%--            printWriter.write("<tr>");--%>
+<%--            printWriter.write("<td>" + product.getName() + "</td>" );--%>
+<%--            printWriter.write("<td>" + product.getDescription()+ "</td>" );--%>
+<%--            printWriter.write("<td>" + product.getPrice() + "</td>" );--%>
+<%--            printWriter.write("</tr>");--%>
+<%--        }--%>
 
-        printWriter.write("</center>");
-    %>
-</table>
+<%--        printWriter.write("</center>");--%>
+<%--    %>--%>
+<%--</table>--%>
 
 <%--<table>--%>
 <%--    <c:forEach var="element" items="${productList}" >--%>
@@ -54,6 +54,29 @@
 <%--      </tr>>--%>
 <%--    </c:forEach>--%>
 <%--</table>--%>
+
+
+<table border='2' width="80%">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>description</th>
+        <th>edit</th>
+        <th>delete</th>
+    </tr>
+    <c:forEach var="element" items="${productList}">
+        <tr>
+            <td><c:out value="${element.id}"/></td>
+            <td><c:out value="${element.name}"/></td>
+            <td><c:out value="${element.price}"/></td>
+            <td><c:out value="${element.description}"/></td>
+            <td><a href='/edit?id=${element.id}'>edit</a></td>
+            <td><a href='/admin/deleteProduct?id=${element.id}'>delete</a></td>
+        </tr>
+    </c:forEach>
+</table>
+
 
 </body>
 </html>

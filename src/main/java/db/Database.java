@@ -18,15 +18,27 @@ public class Database {
 
 
     static {
-        User user = new User("s.klunniy@gmail.com", "123", "admin");
-        USER_LIST.add(user);
-        logger.debug("User" + user + " add to db");
+        User user1 = new User("s.klunniy@gmail.com", "123", "admin");
+        User user2 = new User("ava@gmail.com", "123", "user");
+        User user3 = new User("5", "test", "admin");
+
+        USER_LIST.add(user1);
+        USER_LIST.add(user2);
+        USER_LIST.add(user3);
+
+        logger.debug("Users  add to db");
     }
 
     static {
-        Product product = new Product( "Bread", 20d, "...");
-        LIST_PRODUCTS.add(product);
-        logger.debug("Product" + product + " add to db");
+        Product product1 = new Product( "Bread", 20d, "Kievskiy bread");
+        Product product2 = new Product( "Milk", 100d, "Brovary milk");
+        Product product3= new Product( "Meat", 83d, "Irpen meat");
+
+        LIST_PRODUCTS.add(product1);
+        LIST_PRODUCTS.add(product2);
+        LIST_PRODUCTS.add(product3);
+
+        logger.debug("Products add to db");
     }
 
 }

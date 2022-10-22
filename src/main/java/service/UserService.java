@@ -12,4 +12,5 @@ public interface UserService {
     void addUser(User user);
     List<User> getAll();
     Optional<User> findUserByLoginPassword(String email, String password);
+    boolean deleteUserById(long id);
 }

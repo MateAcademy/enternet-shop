@@ -1,28 +1,28 @@
 package factory;
 
-import service.ItemService;
-import service.impl.ItemServiceImpl;
+import service.ProductService;
+import service.impl.ProductServiceImpl;
 
 /**
  * @author Sergey Klunniy
  */
 public class ProductServiceFactory {
-    private static volatile ItemService itemService;
+    private static volatile ProductService itemService;
 
     static {
         getInstance();
     }
-    public static synchronized ItemService getItemService() {
+    public static synchronized ProductService getItemService() {
         return itemService;
     }
 
-    private static synchronized ItemService getInstance() {
-        ItemService localInstance = itemService;
+    private static synchronized ProductService getInstance() {
+        ProductService localInstance = itemService;
         if (localInstance == null) {
             synchronized (UserServiceFactory.class) {
                 localInstance = itemService;
                 if (localInstance == null) {
-                    itemService = localInstance = new ItemServiceImpl();
+                    itemService = localInstance = new ProductServiceImpl();
                 }
             }
         }

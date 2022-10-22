@@ -1,15 +1,17 @@
 package dao.impl;
 
-import dao.ItemDao;
+import dao.ProductDao;
 import db.Database;
 import model.Product;
+import model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Sergey Klunniy
  */
-public class ProductDaoImpl implements ItemDao {
+public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void addItem(Product product) {
@@ -21,5 +23,16 @@ public class ProductDaoImpl implements ItemDao {
     @Override
     public List<Product> getAll() {
         return Database.LIST_PRODUCTS;
+    }
+
+    @Override
+    public boolean deleteProductById(long id) {
+        Optional<Product > first = Database.LIST_PRODUCTS.stream().filter(t -> t.getId().equals(id)).findFirst();
+        if (first.isPresent()) {
+            Product product = first.get();
+            Database.LIST_PRODUCTS.remove(product);
+            return true;
+        }
+        return false;
     }
 }

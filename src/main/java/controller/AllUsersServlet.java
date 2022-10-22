@@ -19,7 +19,6 @@ import java.util.List;
 @WebServlet(value = "/admin/users")
 public class AllUsersServlet extends HttpServlet {
 
-    //сделать фабрику синглтоном
     private static final UserService userService = UserServiceFactory.getUserService();
 
     @Override
@@ -32,7 +31,6 @@ public class AllUsersServlet extends HttpServlet {
         List<User> allUsers = userService.getAll();
             req.setAttribute("allUsers", allUsers);
             req.getRequestDispatcher("/show_all_users.jsp").forward(req, resp);
-
-
     }
+
 }

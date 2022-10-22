@@ -1,8 +1,8 @@
 package controller;
 
 import model.Product;
-import service.ItemService;
-import service.impl.ItemServiceImpl;
+import service.ProductService;
+import service.impl.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +32,7 @@ public class AddProductServlet extends HttpServlet {
 
             Double priceDouble = Double.parseDouble(price);
 
-            ItemService itemService = new ItemServiceImpl();
+            ProductService itemService = new ProductServiceImpl();
             itemService.addItem(new Product(name, priceDouble, description));
 
             resp.sendRedirect("/getAllProducts");

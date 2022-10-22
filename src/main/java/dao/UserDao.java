@@ -14,5 +14,6 @@ public interface UserDao {
     List<User> getAll();
     boolean findUser(User user);
     Optional<User> findUserByLoginPassword(String email, String password);
+    boolean deleteUserById(long id);
 
 }

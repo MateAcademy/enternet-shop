@@ -40,10 +40,10 @@ public class MailServiceImpl implements MailService {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(code.getUser().getEmail())
+                    InternetAddress.parse("s.klunniy@gmail.com")
             );
             message.setSubject("Одноразовый код для подтверждения покупки");
-            message.setText("Dear Mail Crawler,"
+            message.setText("Dear Mail Crawler,  5544"
                     + "\n\n Please do not spam my email!");
 
             Transport.send(message);

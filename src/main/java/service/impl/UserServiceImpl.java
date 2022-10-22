@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findUserByLoginPassword(String email, String password) {
         return userDao.findUserByLoginPassword(email, password);
     }
+
+    @Override
+    public boolean deleteUserById(long id) {
+        return userDao.deleteUserById(id);
+    }
 }

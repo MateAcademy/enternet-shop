@@ -1,25 +1,25 @@
 package factory;
 
-import dao.ItemDao;
+import dao.ProductDao;
 import dao.impl.ProductDaoImpl;
 
 /**
  * @author Sergey Klunniy
  */
 public class ProductDaoFactory {
-    private static volatile ItemDao itemDao;
+    private static volatile ProductDao itemDao;
 
     static {
         getInstance();
     }
-    public static ItemDao getItemDao() {
+    public static ProductDao getItemDao() {
         return itemDao;
     }
 
-    private static ItemDao getInstance() {
-        ItemDao localInstance = itemDao;
+    private static ProductDao getInstance() {
+        ProductDao localInstance = itemDao;
         if (localInstance == null) {
-            synchronized (ItemDao.class) {
+            synchronized (ProductDao.class) {
                 localInstance = itemDao;
                 if (localInstance == null) {
                     itemDao = localInstance = new ProductDaoImpl();

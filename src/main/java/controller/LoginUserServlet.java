@@ -4,6 +4,8 @@ import dao.UserDao;
 import dao.impl.UserDaoImpl;
 import factory.UserDAOFactory;
 import model.User;
+import service.UserService;
+import service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,8 @@ import java.util.Optional;
 @WebServlet("/login")
 public class LoginUserServlet extends HttpServlet {
 
-    private static final UserDao userDao = UserDAOFactory.getUserDao();
+//    private static final UserDao userDao = UserDAOFactory.getUserDao();
+    private final UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -32,7 +35,7 @@ public class LoginUserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        Optional<User> optUserByLoginPassword = userDao.findUserByLoginPassword(email, password);
+        Optional<User> optUserByLoginPassword = userService.findUserByLoginPassword(email, password);
 
         if (optUserByLoginPassword.isPresent()) {
             HttpSession session = req.getSession();

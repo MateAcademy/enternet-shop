@@ -2,7 +2,7 @@ package controller;
 
 import factory.ProductServiceFactory;
 import model.Product;
-import service.ItemService;
+import service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ import java.util.List;
 @WebServlet(value = "/getAllProducts")
 public class  AllProductsServlet extends HttpServlet {
 
-    private static final ItemService itemService = ProductServiceFactory.getItemService();
+    private static final ProductService itemService = ProductServiceFactory.getItemService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -26,13 +26,9 @@ public class  AllProductsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> allProducts = itemService.getAll();
-        req.setAttribute("allProducts", allProducts);
+        List<Product> productList = itemService.getAll();
+        req.setAttribute("productList", productList);
         req.getRequestDispatcher("/show_all_products.jsp").forward(req, resp);
     }
-
-
-
-
 
 }

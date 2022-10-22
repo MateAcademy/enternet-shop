@@ -13,13 +13,17 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     private Long id;
     private String email;
     private String password;
-
     private String role;
 
     private static Long index = 0L;
+
+    private Long setId() {
+        return ++index;
+    }
 
     public User(String email, String password) {
         this.id = setId();
@@ -27,8 +31,11 @@ public class User {
         this.password = password;
     }
 
-    private Long setId() {
-        return ++index;
+    public User(String email, String password, String role) {
+        this.id = setId();
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     @Override
@@ -36,25 +43,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        return email.equals(user.email) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password);
-    }
-
-    public User(String email, String password, String role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+        return Objects.hash(email, password, role);
     }
 }

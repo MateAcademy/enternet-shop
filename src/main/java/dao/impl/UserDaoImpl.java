@@ -49,4 +49,16 @@ public class  UserDaoImpl implements UserDao {
         User user = new User(email, password);
         return  Database.USER_LIST.stream().filter(t -> t.equals(user)).findAny();
     }
+
+    @Override
+    public boolean deleteUserById(long id) {
+        Optional<User> first = Database.USER_LIST.stream().filter(t -> t.getId().equals(id)).findFirst();
+        if (first.isPresent()) {
+            User user = first.get();
+            Database.USER_LIST.remove(user);
+            return true;
+        }
+
+        return false;
+    }
 }

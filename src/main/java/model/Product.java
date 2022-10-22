@@ -44,4 +44,44 @@ public class Product {
     public int hashCode() {
         return Objects.hash(name, price, description);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public static Long getIndex() {
+        return index;
+    }
+
+    public static void setIndex(Long index) {
+        Product.index = index;
+    }
 }
