@@ -9,11 +9,16 @@ import service.impl.UserServiceImpl;
  * @author Sergey Klunniy
  */
 public class UserServiceFactory {
+
     private static volatile UserService userService;
 
     static {
         getInstance();
     }
+
+    private UserServiceFactory() {
+    }
+
     public static synchronized UserService getUserService() {
         return userService;
     }

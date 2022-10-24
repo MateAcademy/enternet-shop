@@ -8,20 +8,23 @@ import java.sql.SQLException;
 
 public class DbConnector {
 
-    private final Logger logger = Logger.getLogger(DbConnector.class);
+    private static final Logger logger = Logger.getLogger(DbConnector.class);
 
-    private static final String DbURL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DbURL = "jdbc:postgresql://localhost:5432/shop";
     private static final String LOGIN = "postgres";
     private static final String PASSWORD = "vfvfgfgf23";
 
     public static Connection connect() {
         try {
+//          System.setProperty("jdbc.driver", "org.postgresql.Driver");
 
+            Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(DbURL, LOGIN, PASSWORD);
-        } catch (SQLException throwables) {
-
-            throwables.printStackTrace();
+            return connection;
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.error("no connect to db: " + e);
         }
-
+        return null;
     }
+
 }

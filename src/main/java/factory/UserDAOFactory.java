@@ -8,14 +8,15 @@ import dao.impl.UserDaoImpl;
  */
 public class UserDAOFactory {
 
-    private UserDAOFactory() {
-    }
-
     private static volatile UserDao userDao;
 
     static {
         getInstance();
     }
+
+    private UserDAOFactory() {
+    }
+
     public static UserDao getUserDao() {
         return userDao;
     }

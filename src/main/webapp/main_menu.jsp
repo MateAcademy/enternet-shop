@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Main</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <a href="/"> На страницу входа </a> <br>

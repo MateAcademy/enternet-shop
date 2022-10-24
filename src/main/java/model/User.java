@@ -32,7 +32,7 @@ public class User {
     }
 
     public User(String email, String password, String role) {
-        this.id = setId();
+//        this.id = setId();
         this.email = email;
         this.password = password;
         this.role = role;

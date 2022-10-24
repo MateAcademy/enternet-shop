@@ -1,30 +1,23 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @author Sergey Klunniy
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Code {
-    private String code;
+    private Long id_code;
+    private String value;
     private User user;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
+    public Code(String value, User user) {
+        this.value = value;
         this.user = user;
     }
 
-    public Code(String code, User user) {
-        this.code = code;
-        this.user = user;
-    }
 }
