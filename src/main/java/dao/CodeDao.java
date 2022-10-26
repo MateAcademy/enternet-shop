@@ -1,5 +1,6 @@
 package dao;
 
+import dto.CodeDTO;
 import model.Code;
 import model.User;
 

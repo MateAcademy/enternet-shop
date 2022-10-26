@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dto.CodeDTO;
 import dao.CodeDao;
 import model.Code;
 import model.User;
@@ -33,26 +34,31 @@ public class CodeDaoImpl implements CodeDao {
 
     @Override
     public Code getCode(User user) {
-//todo: продумать как отмечать что код в базе не свежий уже
+//todo: продумать как отмечать что код в базе не свежий уже           where user_id= and avaliable = true
+
+        Code code = null;
         //Создание и управление соединениями
         try (Connection connection = DbConnector.connect()) {
-            String sql = String.format("select * from code where user_id='%d' order by id_code desc limit 1", user.getId());
+            String sql = String.format("select * from code INNER JOIN users u on u.id_user = code.user_id where user_id = '%d' order by id_code desc limit 1", user.getId());
 
             // выполнение и управление запросами к базе данных
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                Code code = new Code(
+                 code = new Code(
                         resultSet.getLong("id_code"),
                         resultSet.getString("valus"),
-                        resultSet.getLong("user_id")
+                        new User( resultSet.getLong("id_user"),
+                                resultSet.getString("email"),
+                                resultSet.getString("password"),
+                                resultSet.getString("role"))
                 );
             }
-
-            logger.info("add user to db: " + execute);
+            logger.info("add user to db: " + user.getEmail());
         } catch (SQLException e) {
             logger.error("can't add user to db, " + e);
         }
+        return code;
     }
 }
