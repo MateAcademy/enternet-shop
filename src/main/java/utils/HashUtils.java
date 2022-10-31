@@ -14,13 +14,61 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
+import org.apache.log4j.Logger;
 import org.apache.soap.encoding.Hex;
 
 /**
  * @author Sergey Klunniy
  */
 public class HashUtils {
+
+    private static Logger logger = Logger.getLogger(HashUtils.class);
+
     public HashUtils() {
+    }
+
+    //encrypt password with SHA-256
+    public static String getSHA256SecurePassword(String passwordToHash) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
+        return bytesToHex(encodedhash);
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(getSHA256SecurePassword("hillel+--tt"));
+    }
+
+
+    //encrypt password with SHA-256 and SALT
+    public static String getSHA256SecurePassword(String passwordToHash, String salt) {
+        String generatePassword = null;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(salt.getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatePassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Can't find algorithm ", e);
+        }
+        return generatePassword;
     }
 
     public static String hmac(String data, String key, HashUtils.Algorithm algorithm) throws SecurityException {
@@ -42,7 +90,7 @@ public class HashUtils {
             byte[] encrypted = cipher.doFinal(text.getBytes());
             return Hex.encode(encrypted);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                NoSuchPaddingException var5) {
+                 NoSuchPaddingException var5) {
             throw new SecurityException(var5);
         }
     }
@@ -55,7 +103,7 @@ public class HashUtils {
             byte[] toDecode = Hex.decode(hexText);
             return new String(cipher.doFinal(toDecode));
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                NoSuchPaddingException var5) {
+                 NoSuchPaddingException var5) {
             throw new SecurityException(var5);
         }
     }
@@ -66,7 +114,7 @@ public class HashUtils {
             cipher.init(1, key);
             return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                NoSuchPaddingException var3) {
+                 NoSuchPaddingException var3) {
             throw new SecurityException(var3);
         }
     }
@@ -77,7 +125,7 @@ public class HashUtils {
             cipher.init(2, key);
             return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
-                NoSuchPaddingException var3) {
+                 NoSuchPaddingException var3) {
             throw new SecurityException(var3);
         }
     }
@@ -116,13 +164,14 @@ public class HashUtils {
             try (FileOutputStream stream = new FileOutputStream(tempFile.toFile())) {
                 stream.write(decryptedFileBytes);
             }
-        } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException | IOException | InvalidKeySpecException var3) {
+        } catch (NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException |
+                 NoSuchPaddingException | IOException | InvalidKeySpecException var3) {
             throw new SecurityException(var3);
         }
     }
 
-    public static void main(String[] args) {
-        myDecryptToCCMTAFileEmail();
-    }
+//    public static void main(String[] args) {
+//        myDecryptToCCMTAFileEmail();
+//    }
 
 }

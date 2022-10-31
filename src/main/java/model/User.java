@@ -19,6 +19,8 @@ public class User {
     private String password;
     private String role;
 
+//    private boolean accessible;
+
     private static Long index = 0L;
 
     private Long setId() {

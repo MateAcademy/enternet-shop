@@ -3,7 +3,6 @@ package dao.impl;
 import dao.ProductDao;
 import db.Database;
 import model.Product;
-import model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean deleteProductById(long id) {
-        Optional<Product > first = Database.LIST_PRODUCTS.stream().filter(t -> t.getId().equals(id)).findFirst();
+        Optional<Product > first = Database.LIST_PRODUCTS.stream().filter(t -> t.getId_product().equals(id)).findFirst();
         if (first.isPresent()) {
             Product product = first.get();
             Database.LIST_PRODUCTS.remove(product);

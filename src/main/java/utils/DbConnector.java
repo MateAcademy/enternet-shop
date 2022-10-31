@@ -12,7 +12,7 @@ public class DbConnector {
 
     private static final String DbURL = "jdbc:postgresql://localhost:5432/shop";
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "vfvfgfgf23";
+    private static final String PASSWORD = "test";
 
     public static Connection connect() {
         try {
