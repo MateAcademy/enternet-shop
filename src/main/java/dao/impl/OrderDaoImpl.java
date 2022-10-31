@@ -25,8 +25,8 @@ public class OrderDaoImpl implements OrderDao {
 
         List<Order> orderList = new ArrayList<>();
 
-        String getAllOrder = "select id_order, id_product, name, count(name) from \"order\" inner join order_basket_product opb on \"order\".id_order = opb.order_id\n" +
-                "inner join products on opb.product_id = products.id_product group by name, id_product, id_order order by id_product";
+        String getAllOrder = "select id_order, id_product, name, count(name) from \"order\" inner join order_basket ob on \"order\".id_order = ob.order_id\n" +
+                "inner join products on ob.product_id = products.id_product group by name, id_product, id_order order by id_product";
 
         try (Connection connection = DbConnector.connect()) {
             PreparedStatement preparedStatement = connection.prepareStatement(getAllOrder);
