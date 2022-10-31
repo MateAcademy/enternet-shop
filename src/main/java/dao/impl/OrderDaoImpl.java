@@ -32,23 +32,24 @@ public class OrderDaoImpl implements OrderDao {
             PreparedStatement preparedStatement = connection.prepareStatement(getAllOrder);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-
+            while (resultSet.next()) {
                 Long id_order = resultSet.getLong("id_order");
                 Long id_product = resultSet.getLong("id_product");
                 String name = resultSet.getString("name");
                 Long count = resultSet.getLong("count");
 
-                Order order = new Order();
-                order.setId_order(id_order);
+                Order order = new Order(id_order);
                 Product product = new Product(id_product, name);
-                order.getProducts().add(product);
-                orderList.add(order);
+                List<Product> listProduct = new ArrayList<>();
+                for (int i = 0; i < count; i++) {
+                    order.getProducts().add(product);
+                    listProduct.add(product);
+                }
 
                 boolean addProduct = false;
                 for (Order o : orderList) {
-                    if(id_order.equals(order.getId_order())) {
-                        o.getProducts().add(product);
+                    if (id_order.equals(o.getId_order())) {
+                        o.getProducts().addAll(listProduct);
                         addProduct = true;
                     }
                 }
@@ -56,6 +57,7 @@ public class OrderDaoImpl implements OrderDao {
                 if (!addProduct) {
                     orderList.add(order);
                 }
+
             }
 
         } catch (SQLException e) {

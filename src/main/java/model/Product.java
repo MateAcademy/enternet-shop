@@ -33,4 +33,11 @@ public class Product {
         return ++index;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "id_product=" + id_product +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
