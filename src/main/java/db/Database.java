@@ -6,27 +6,26 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import utils.Role;
 
 /**
  * @author Sergey Klunni\y
  */
 public class Database {
     private static final Logger logger = Logger.getLogger(Database.class);
-
     public final static List<User> USER_LIST = new ArrayList<>();
     public final static List<Product> LIST_PRODUCTS = new ArrayList<>();
 
-
     static {
-        User user1 = new User("s.klunniy@gmail.com", "123", "admin");
-        User user2 = new User("ava@gmail.com", "123", "user");
-        User user3 = new User("5", "test", "admin");
+        User user1 = new User("s.klunniy@gmail.com", "123", Role.admin);
+        User user2 = new User("ava@gmail.com", "123", Role.user);
+        User user3 = new User("5", "test", Role.user);
 
         USER_LIST.add(user1);
         USER_LIST.add(user2);
         USER_LIST.add(user3);
 
-        logger.debug("Users  add to db");
+        logger.debug("Users add to db in static block class Database" );
     }
 
     static {

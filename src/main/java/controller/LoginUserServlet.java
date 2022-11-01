@@ -6,11 +6,14 @@ import factory.UserDAOFactory;
 import model.User;
 import service.UserService;
 import service.impl.UserServiceImpl;
+import utils.HashUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.Optional;
 
 /**
@@ -35,14 +38,19 @@ public class LoginUserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        try {
+            password = HashUtils.getSHA256SecurePassword(password);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
         Optional<User> optUserByLoginPassword = userService.findUserByLoginPassword(email, password);
 
-        if (optUserByLoginPassword.isPresent()) {
+        if (optUserByLoginPassword.isPresent() && optUserByLoginPassword.get().isAvailable()) {
             HttpSession session = req.getSession();
             session.setAttribute("user", optUserByLoginPassword.get());
 //            resp.addCookie(new Cookie("adminTE", "TE"));
             req.getRequestDispatcher("/main_menu.jsp").forward(req, resp);
-//            resp.sendRedirect("/main_menu.jsp");
         } else {
             String error = "Ваш логин и пароль неверный!";
             req.setAttribute("error", error);

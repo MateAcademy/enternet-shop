@@ -1,9 +1,12 @@
 package controller;
 
 import factory.UserServiceFactory;
+import lombok.SneakyThrows;
 import model.User;
 import service.UserService;
 import service.impl.UserServiceImpl;
+import utils.HashUtils;
+import utils.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +29,7 @@ public class UserRegistrationServlet extends HttpServlet {
         //forward мы отправили пользователя с его запросом на /add_user.jsp
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -34,8 +38,8 @@ public class UserRegistrationServlet extends HttpServlet {
 
         if (Objects.equals(password, repeatPassword)) {
             req.setAttribute("error", null);
-            User user = new User(email, password, "user");
-            System.out.println("Кладем юзера в бд");
+            password = HashUtils.getSHA256SecurePassword(password);
+            User user = new User(email, password, Role.user, true);
             userService.addUser(user);
             resp.sendRedirect("/admin/users");
         } else {

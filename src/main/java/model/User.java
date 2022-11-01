@@ -3,6 +3,7 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import utils.Role;
 
 import java.util.Objects;
 
@@ -17,23 +18,36 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    private String role;
+    private Role role;
+    private boolean available;
 
-//    private boolean accessible;
+//    private static Long index = 0L;
 
-    private static Long index = 0L;
-
-    private Long setId() {
-        return ++index;
-    }
+ //   private Long setId() {
+//        return ++index;
+//    }
 
     public User(String email, String password) {
-        this.id = setId();
+//        this.id = setId();
         this.email = email;
         this.password = password;
     }
 
-    public User(String email, String password, String role) {
+    public User(Long id, String email, String password, Role role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String email, String password, Role role, boolean available) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.available = available;
+    }
+
+    public User(String email, String password, Role role) {
 //        this.id = setId();
         this.email = email;
         this.password = password;

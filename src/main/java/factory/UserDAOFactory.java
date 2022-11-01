@@ -2,6 +2,7 @@ package factory;
 
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
+import dao.impl.UserDaoJDBCImpl;
 
 /**
  * @author Sergey Klunniy
@@ -27,7 +28,7 @@ public class UserDAOFactory {
             synchronized (UserDao.class) {
                 localInstance = userDao;
                 if (localInstance == null) {
-                    userDao = localInstance = new UserDaoImpl();
+                    userDao = localInstance = new UserDaoJDBCImpl();
                 }
             }
         }

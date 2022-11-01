@@ -4,11 +4,9 @@ import dao.UserDao;
 import model.User;
 import org.apache.log4j.Logger;
 import utils.DbConnector;
+import utils.Role;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,15 +17,17 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
+        String sql = "insert into users(email, password, role, available) VALUES (?, ?, ?, ?)";
         //Создание и управление соединениями
         try (Connection connection = DbConnector.connect()) {
-            String sql = String.format("insert into shop.public.users(email, password, role) VALUES ('%s', '%s', '%s')",
-                    user.getEmail(), user.getPassword(), user.getRole());
-
             // выполнение и управление запросами к базе данных
-            Statement statement = connection.createStatement();
-            boolean execute = statement.execute(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole().toString());
+            ps.setBoolean(4, user.isAvailable());
 
+            int execute = ps.executeUpdate(sql);
             logger.info("add user to db: " + execute);
         } catch (SQLException e) {
             logger.error("can't add user to db, " + e);
@@ -54,13 +54,11 @@ public class UserDaoJDBCImpl implements UserDao {
                         resultSet.getLong("id_user"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
-                        resultSet.getString("role")
+                        Role.valueOf(resultSet.getString("role")),
+                        resultSet.getBoolean("available")
                 );
-
                 userList.add(userFromDb);
             }
-
-            System.out.println("get all users to db: " + userList);
             logger.info("get all users to db");
             return userList;
         } catch (SQLException e) {
@@ -76,7 +74,31 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public Optional<User> findUserByLoginPassword(String email, String password) {
-        return Optional.empty();
+
+        String sql = "select * from users where email = ? and password = ? ";
+        try (Connection connection = DbConnector.connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            User user = null;
+            if (resultSet.next()) {
+                long id_user = resultSet.getLong("id_user");
+                String email1 = resultSet.getString("email");
+                String password1 = resultSet.getString("password");
+                Role role = Role.valueOf(resultSet.getString("role"));
+                boolean available = resultSet.getBoolean("available");
+                user = new User(id_user, email1, password1, role, available);
+            }
+
+            Optional<User> userOptional = Optional.of(user);
+            return userOptional;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

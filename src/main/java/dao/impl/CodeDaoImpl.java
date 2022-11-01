@@ -46,14 +46,14 @@ public class CodeDaoImpl implements CodeDao {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                 code = new Code(
-                        resultSet.getLong("id_code"),
-                        resultSet.getString("valus"),
-                        new User( resultSet.getLong("id_user"),
-                                resultSet.getString("email"),
-                                resultSet.getString("password"),
-                                resultSet.getString("role"))
-                );
+//                 code = new Code(
+//                        resultSet.getLong("id_code"),
+//                        resultSet.getString("valus"),
+//                        new User( resultSet.getLong("id_user"),
+//                                resultSet.getString("email"),
+//                                resultSet.getString("password"),
+//                                resultSet.getString("role"))
+//                );
             }
             logger.info("add user to db: " + user.getEmail());
         } catch (SQLException e) {
