@@ -17,7 +17,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        String sql = "insert into users(email, password, role, available) VALUES (?, ?, ?, ?)";
+        String sql = "insert into \"users\"(email, password, role, available) VALUES (?, ?, ?::role_enum, ?)";
         //Создание и управление соединениями
         try (Connection connection = DbConnector.connect()) {
             // выполнение и управление запросами к базе данных
@@ -27,7 +27,7 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setString(3, user.getRole().toString());
             ps.setBoolean(4, user.isAvailable());
 
-            int execute = ps.executeUpdate(sql);
+            int execute = ps.executeUpdate();
             logger.info("add user to db: " + execute);
         } catch (SQLException e) {
             logger.error("can't add user to db, " + e);
