@@ -2,6 +2,7 @@ package factory;
 
 import dao.ProductDao;
 import dao.impl.ProductDaoImpl;
+import dao.impl.ProductDaoJDBCImpl;
 
 /**
  * @author Sergey Klunniy
@@ -22,7 +23,7 @@ public class ProductDaoFactory {
             synchronized (ProductDao.class) {
                 localInstance = itemDao;
                 if (localInstance == null) {
-                    itemDao = localInstance = new ProductDaoImpl();
+                    itemDao = localInstance = new ProductDaoJDBCImpl();
                 }
             }
         }

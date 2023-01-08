@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Code {
+public class  Code {
     private Long id_code;
     private String value;
     private User user;

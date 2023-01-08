@@ -1,8 +1,8 @@
 package controller;
 
+import factory.ProductServiceFactory;
 import model.Product;
 import service.ProductService;
-import service.impl.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +16,7 @@ import java.io.IOException;
 
 public class AddProductServlet extends HttpServlet {
 
+    private ProductService itemService = ProductServiceFactory.getProductService();
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -31,10 +32,7 @@ public class AddProductServlet extends HttpServlet {
             String description = req.getParameter("description");
 
             Double priceDouble = Double.parseDouble(price);
-
-            ProductService itemService = new ProductServiceImpl();
             itemService.addItem(new Product(name, priceDouble, description));
-
             resp.sendRedirect("/getAllProducts");
         } catch (Exception ex) {
 //Todo: если ввожу логин и один пароль

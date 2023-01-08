@@ -1,3 +1,10 @@
+0. Создать веб приложение с формой регистрации пользователей, в которой на главной странице пользователей есть две кнопки
+"войти" и "зарегистрироваться", при нажатии на войти вводится логин и пароль и если логин и пароль верный выводится сообщение
+"Привет + логи", если не верный то выводитя сообщение "логин не верный".
+На странице регистрации юзер придумывает логин и пароль
+
+С помощью регулярного  выражения валидировать пароль
+
 1. Пользователь может только покупать товары. После входа пользователя ему доступна таблица товаров с кнопкой купить у каждого из них.
 2. После нажатия на кнопку "купить" товар пользователя попадает в корзину
 3. После нажатия на кнопку/ссылку "корзина" вы переходите в оплату товара.
@@ -5,3 +12,120 @@
 5. Пользователю приходит одноразовый емейл код(4 символа) для подтверждения покупки
 6. Пользователь вводит код и если код верен - то выводится сообщение "покупка успешно совершена", если неверно то просят
 "ввести код заново"
+
+7. Изменить метод добавления юзера в БД с учетом записи хеша пароля.
+
+9. Добавить регистрацию пользователя в магазин, добавить ADMIN'a в систему, что бы он мог CRUD'ить юзеров,
+все это сделать с учетом того, что пароль не должен нигде хранится в явном виде.
+
+10. написать JUnit тест на метод который хеширует и солит пароль.
+
+11. прикрутить crud для ИМ что бы админ мог добавлять /удалять юзеров и товары, а пользователь мог покупать товары
++ прикрутить хеширование солью
+
+Напишите софт который будет брутфорсить пароли, используя ApachHTTPClient
+
+проверять если регистрировался то второй раз не делать
+
+
+
+create table if not exists products
+(
+    id_product  bigserial
+        constraint products_pk
+            primary key,
+    name        varchar not null,
+    price       bigint  not null,
+    description varchar not null
+);
+
+alter table products
+    owner to postgres;
+
+create table if not exists users
+(
+    id_user   bigserial
+        constraint users_pk
+            primary key,
+    email     text      not null,
+    password  text      not null,
+    role      role_enum not null,
+    available boolean default false
+);
+
+alter table users
+    owner to postgres;
+
+create table if not exists basket
+(
+    id_basket bigserial
+        constraint basket_pk
+            primary key,
+    user_id   bigint not null
+        constraint basket_users_id_user_fk
+            references users
+);
+
+alter table basket
+    owner to postgres;
+
+create table if not exists "order"
+(
+    id_order     bigserial
+        constraint order_pk
+            primary key,
+    user_id      bigint
+        constraint order_users_id_user_fk
+            references users,
+    first_name   varchar(15) not null,
+    last_name    varchar(15) not null,
+    number_phone bigint      not null,
+    street       varchar,
+    house_number varchar,
+    entered_code integer     not null,
+    basket_id    bigint      not null
+        constraint order_basket_id_basket_fk
+            references basket
+);
+
+alter table "order"
+    owner to postgres;
+
+create table if not exists product_busket
+(
+    id_product_busket bigserial
+        constraint product_busket_pk
+            primary key,
+    product_id        bigint not null
+        constraint product_busket_product_fk
+            references products,
+    basket_id         bigint not null
+        constraint product_busket_fk
+            references basket
+);
+
+alter table product_busket
+    owner to postgres;
+
+create unique index if not exists users_email_uindex
+    on users (email);
+
+create table if not exists order_basket
+(
+    id_order_basket_product bigint default nextval('order_basket_product_id_order_basket_product_seq'::regclass) not null
+        constraint order_basket_product_pk
+            primary key,
+    busket_id               bigint                                                                               not null
+        constraint order_basket_product_to_basket__fk
+            references basket,
+    order_id                bigint                                                                               not null
+        constraint order_basket_product_to_order_fk
+            references "order",
+    product_id              bigint                                                                               not null
+        constraint order_basket_product_id_product_fk
+            references products
+);
+
+alter table order_basket
+    owner to postgres;
+

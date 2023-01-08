@@ -12,22 +12,22 @@ import java.util.List;
  */
 public class ProductServiceImpl implements ProductService {
 
-    private static final ProductDao itemDao = ProductDaoFactory.getItemDao();
+    private static final ProductDao productDao = ProductDaoFactory.getItemDao();
 
     @Override
     public void addItem(Product product) {
         if (product !=null) {
-            itemDao.addItem(product);
+            productDao.addProduct(product);
         }
     }
 
     @Override
     public List<Product> getAll() {
-        return itemDao.getAll();
+        return productDao.getAll();
     }
 
     @Override
-    public boolean deleteProductById(long idProduct) {
-        return itemDao.deleteProductById(idProduct);
+    public int deleteProductById(long idProduct) {
+        return productDao.deleteProductById(idProduct);
     }
 }

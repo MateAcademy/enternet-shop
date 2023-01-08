@@ -1,4 +1,4 @@
-package controller.next;
+package controller;
 
 public class EditProductServlet {
 }

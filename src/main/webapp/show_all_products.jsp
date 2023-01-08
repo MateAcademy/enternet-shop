@@ -65,14 +65,14 @@
         <th>edit</th>
         <th>delete</th>
     </tr>
-    <c:forEach var="element" items="${productList}">
+    <c:forEach var="product" items="${productList}">
         <tr>
-            <td><c:out value="${element.id}"/></td>
-            <td><c:out value="${element.name}"/></td>
-            <td><c:out value="${element.price}"/></td>
-            <td><c:out value="${element.description}"/></td>
-            <td><a href='/edit?id=${element.id}'>edit</a></td>
-            <td><a href='/admin/deleteProduct?id=${element.id}'>delete</a></td>
+            <td><c:out value="${product.id_product}"/></td>
+            <td><c:out value="${product.name}"/></td>
+            <td><c:out value="${product.price}"/></td>
+            <td><c:out value="${product.description}"/></td>
+            <td><a href='/edit?id_product=${product.id_product}'>edit</a></td>
+            <td><a href='/admin/deleteProduct?id_product=${product.id_product}'>delete</a></td>
         </tr>
     </c:forEach>
 </table>

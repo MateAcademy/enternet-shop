@@ -36,7 +36,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUserById(long id) {
+    public int deleteUserById(long id) {
         return userDao.deleteUserById(id);
+    }
+
+    @Override
+    public boolean findUserByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 }

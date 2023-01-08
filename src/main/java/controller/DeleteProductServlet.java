@@ -1,8 +1,8 @@
 package controller;
 
 import exception.TAException;
+import factory.ProductServiceFactory;
 import service.ProductService;
-import service.impl.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,8 @@ import java.io.IOException;
 @WebServlet(value = "/admin/deleteProduct")
 public class DeleteProductServlet extends HttpServlet {
 
-    private ProductService productService = new ProductServiceImpl();
+    private final ProductService productService = ProductServiceFactory.getProductService();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doDelete(req, resp);
@@ -22,13 +23,15 @@ public class DeleteProductServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productIdToDelete = req.getParameter("id");
+        String productIdToDelete = req.getParameter("id_product");
         if (productIdToDelete != null) {
-            boolean deleteUser = productService.deleteProductById(Long.parseLong(productIdToDelete));
-            if (deleteUser==true)
-                req.getRequestDispatcher( "/getAllProducts").forward(req, resp);
+            int deleteProductById = productService.deleteProductById(Long.parseLong(productIdToDelete));
+            if (deleteProductById == 1)
+                req.getRequestDispatcher("/getAllProducts").forward(req, resp);
+        } else {
+            throw new TAException();
         }
-        throw new TAException();
+
     }
 
 

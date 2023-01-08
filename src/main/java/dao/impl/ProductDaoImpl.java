@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ProductDaoImpl implements ProductDao {
 
     @Override
-    public void addItem(Product product) {
+    public void addProduct(Product product) {
         if (product !=null) {
             Database.LIST_PRODUCTS.add(product);
         }
@@ -25,13 +25,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean deleteProductById(long id) {
+    public int deleteProductById(long id) {
         Optional<Product > first = Database.LIST_PRODUCTS.stream().filter(t -> t.getId_product().equals(id)).findFirst();
         if (first.isPresent()) {
             Product product = first.get();
             Database.LIST_PRODUCTS.remove(product);
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 }

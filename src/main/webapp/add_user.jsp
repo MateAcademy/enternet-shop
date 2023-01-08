@@ -28,7 +28,8 @@
       %> <br>
     </h4>
 
-    <form action="/admin/register" method="post">
+    <form action="/register" method="post">
+        Name <input name="name" type="text"> <br>
         Email <input name="email" type="email"> <br>
         password <input name="password" type="password"> <br>
         repeat password <input name="repeatPassword" type="password"> <br>

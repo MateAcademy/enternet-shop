@@ -1,9 +1,7 @@
 package controller;
 
-import dao.UserDao;
-import dao.impl.UserDaoImpl;
-import factory.UserDAOFactory;
 import model.User;
+import org.apache.log4j.Logger;
 import service.UserService;
 import service.impl.UserServiceImpl;
 import utils.HashUtils;
@@ -13,14 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.Optional;
+
 
 /**
  * @author Sergey Klunniy
  */
 @WebServlet("/login")
 public class LoginUserServlet extends HttpServlet {
+
+    private Logger logger = Logger.getLogger(LoginUserServlet.class);
 
 //    private static final UserDao userDao = UserDAOFactory.getUserDao();
     private final UserService userService = new UserServiceImpl();
@@ -33,7 +33,12 @@ public class LoginUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //todo: как мне сделать при возврате на главную страницу что бы убралось поле
 //мы сразу можем перейти на main_menu.jsp - а так не должно быть
-        req.setAttribute("error", null);
+
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+
+//        req.setAttribute("error", null);
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -50,7 +55,7 @@ public class LoginUserServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("user", optUserByLoginPassword.get());
 //            resp.addCookie(new Cookie("adminTE", "TE"));
-            req.getRequestDispatcher("/main_menu.jsp").forward(req, resp);
+            req.getRequestDispatcher("main_menu.jsp").forward(req, resp);
         } else {
             String error = "Ваш логин и пароль неверный!";
             req.setAttribute("error", error);

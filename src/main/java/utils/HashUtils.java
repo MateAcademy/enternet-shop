@@ -5,6 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +14,7 @@ import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.apache.soap.encoding.Hex;
@@ -55,7 +57,6 @@ public class HashUtils {
     //encrypt password with SHA-256 and SALT
     public static String getSHA256SecurePassword(String passwordToHash, String salt) {
         String generatePassword = null;
-
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(salt.getBytes(StandardCharsets.UTF_8));
@@ -69,6 +70,12 @@ public class HashUtils {
             logger.error("Can't find algorithm ", e);
         }
         return generatePassword;
+    }
+
+    public static String getRandomSalt() {
+        byte[] array = new byte[6];
+        new Random().nextBytes(array);
+        return new String(array, Charset.forName("UTF-8"));
     }
 
     public static String hmac(String data, String key, HashUtils.Algorithm algorithm) throws SecurityException {

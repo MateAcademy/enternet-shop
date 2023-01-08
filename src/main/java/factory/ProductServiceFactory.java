@@ -7,22 +7,22 @@ import service.impl.ProductServiceImpl;
  * @author Sergey Klunniy
  */
 public class ProductServiceFactory {
-    private static volatile ProductService itemService;
+    private static volatile ProductService productService;
 
     static {
         getInstance();
     }
-    public static synchronized ProductService getItemService() {
-        return itemService;
+    public static synchronized ProductService getProductService() {
+        return productService;
     }
 
     private static synchronized ProductService getInstance() {
-        ProductService localInstance = itemService;
+        ProductService localInstance = productService;
         if (localInstance == null) {
             synchronized (UserServiceFactory.class) {
-                localInstance = itemService;
+                localInstance = productService;
                 if (localInstance == null) {
-                    itemService = localInstance = new ProductServiceImpl();
+                    productService = localInstance = new ProductServiceImpl();
                 }
             }
         }

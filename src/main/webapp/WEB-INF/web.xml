@@ -11,13 +11,14 @@
 
   <servlet-mapping>
     <servlet-name>UserRegistrationServlet</servlet-name>
-    <url-pattern>/admin/register</url-pattern>
+    <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
   <servlet>
     <servlet-name>ItemServlet</servlet-name>
     <servlet-class>controller.AddProductServlet</servlet-class>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>ItemServlet</servlet-name>
     <url-pattern>/addProducts</url-pattern>

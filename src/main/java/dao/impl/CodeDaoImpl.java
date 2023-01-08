@@ -1,6 +1,5 @@
 package dao.impl;
 
-import dto.CodeDTO;
 import dao.CodeDao;
 import model.Code;
 import model.User;
@@ -20,12 +19,12 @@ public class CodeDaoImpl implements CodeDao {
     public void add(Code code) {
         try (Connection connection = DbConnector.connect()) {
             String sql = String.format("insert to code(code, user_id) values('%s', '%s')",
-                    code.getValue(), code.getUser().getId());
+                    code.getValue(), code.getUser().getId_user());
 
             Statement statement = connection.createStatement();
             boolean isAddToDB = statement.execute(sql);
 
-            logger.info("add code to db, user_id: " + code.getUser().getId() + " code: " + code.getValue() +
+            logger.info("add code to db, user_id: " + code.getUser().getId_user() + " code: " + code.getValue() +
                     " result: " + isAddToDB);
         } catch (SQLException ex) {
             logger.error("don't add code to db " + ex);
@@ -39,7 +38,7 @@ public class CodeDaoImpl implements CodeDao {
         Code code = null;
         //Создание и управление соединениями
         try (Connection connection = DbConnector.connect()) {
-            String sql = String.format("select * from code INNER JOIN users u on u.id_user = code.user_id where user_id = '%d' order by id_code desc limit 1", user.getId());
+            String sql = String.format("select * from code INNER JOIN users u on u.id_user = code.user_id where user_id = '%d' order by id_code desc limit 1", user.getId_user());
 
             // выполнение и управление запросами к базе данных
             Statement statement = connection.createStatement();

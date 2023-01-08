@@ -11,5 +11,5 @@ public interface ProductService {
 
     void addItem(Product product);
     List<Product> getAll();
-    boolean deleteProductById(long parseLong);
+    int deleteProductById(long parseLong);
 }

@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface ProductDao {
 
-    void addItem(Product product);
+    void addProduct(Product product);
     List<Product> getAll();
-    boolean deleteProductById(long parseLong);
+    int deleteProductById(long parseLong);
 
 }

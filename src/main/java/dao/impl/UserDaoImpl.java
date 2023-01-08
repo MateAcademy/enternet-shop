@@ -5,8 +5,6 @@ import db.Database;
 import model.User;
 import org.apache.log4j.Logger;
 
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,14 +49,24 @@ public class  UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean deleteUserById(long id) {
-        Optional<User> first = Database.USER_LIST.stream().filter(t -> t.getId().equals(id)).findFirst();
+    public int deleteUserById(long id) {
+        Optional<User> first = Database.USER_LIST.stream().filter(t -> t.getId_user().equals(id)).findFirst();
         if (first.isPresent()) {
             User user = first.get();
             Database.USER_LIST.remove(user);
-            return true;
+            return 1;
         }
 
+        return 0;
+    }
+
+    @Override
+    public boolean findUserByEmail(String email) {
         return false;
+    }
+
+    @Override
+    public void updateUser(User user) {
+
     }
 }

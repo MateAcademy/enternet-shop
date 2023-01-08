@@ -1,6 +1,7 @@
 package controller;
 
 import exception.TAException;
+import factory.UserServiceFactory;
 import service.UserService;
 import service.impl.UserServiceImpl;
 
@@ -16,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/admin/deleteUser")
 public class DeleteUserServlet extends HttpServlet {
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService = UserServiceFactory.getUserService();
 
 
     @Override
@@ -26,11 +27,11 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, TAException {
-        String userIdToDelete = req.getParameter("id");
+        String userIdToDelete = req.getParameter("id_user");
         if (userIdToDelete != null) {
-            boolean deleteUser = userService.deleteUserById(Long.parseLong(userIdToDelete));
-            if (deleteUser==true)
-                req.getRequestDispatcher( "/admin/users").forward(req, resp);
+            int deleteUser = userService.deleteUserById(Long.parseLong(userIdToDelete));
+            if (deleteUser == 1)
+                req.getRequestDispatcher("/admin/users").forward(req, resp);
         }
         throw new TAException();
     }
