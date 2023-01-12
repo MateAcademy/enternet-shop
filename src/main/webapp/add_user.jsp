@@ -14,20 +14,16 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<%--<c:set var="test" value="TestVariable"/>--%>
-<%--<c:out value="${error}">Fail</c:out>--%>
-<a href="/main_menu.jsp"> Назад </a> <br>
 <center>
     <h4>
-      <%
-          String error = (String) request.getAttribute("error");
-          if (error!=null) {
-              response.getWriter().write(error);
-          }
-      %> <br>
+      <%    String error = (String) request.getAttribute("error");
+            if (error!=null) {
+            response.getWriter().write(error);
+            }
+      %>
     </h4>
-
+    <a href="/main_menu.jsp"> Назад </a>
+    <br>
     <form action="/register" method="post">
         Name <input name="name" type="text"> <br>
         Email <input name="email" type="email"> <br>

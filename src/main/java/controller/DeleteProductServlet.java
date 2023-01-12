@@ -1,6 +1,6 @@
 package controller;
 
-import exception.TAException;
+import exception.TEAppException;
 import factory.ProductServiceFactory;
 import service.ProductService;
 
@@ -29,7 +29,7 @@ public class DeleteProductServlet extends HttpServlet {
             if (deleteProductById == 1)
                 req.getRequestDispatcher("/getAllProducts").forward(req, resp);
         } else {
-            throw new TAException();
+            throw new TEAppException();
         }
 
     }

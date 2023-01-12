@@ -43,19 +43,13 @@ public class User {
         return available;
     }
 
-    //    private static Long index = 0L;
-
- //   private Long setId() {
-//        return ++index;
-//    }
-
-    public User(String name, String email, String password, String salt, String hashPassword, Role role) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.salt = salt;
-        this.hashPassword = hashPassword;
-        this.role = role;
+        salt = HashUtils.getRandomSalt();;
+        this.hashPassword = HashUtils.getSHA256SecurePassword(password, salt);;
+        this.role = Role.USER;
     }
 
     public User(String name, String email, String password, Role role, Boolean available) {
@@ -68,41 +62,20 @@ public class User {
     }
 
     public User(String email, String password) {
-//        this.id = setId();
         this.email = email;
         this.password = password;
     }
-//
-    public User( String email, String password, Role role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-//
-//    public User(String email, String password, Role role, boolean available) {
-//        this.email = email;
-//        this.password = password;
-//        this.role = role;
-//        this.available = available;
-//    }
-//
-//    public User(String email, String password, Role role) {
-////        this.id = setId();
-//        this.email = email;
-//        this.password = password;
-//        this.role = role;
-//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return email.equals(user.email) && password.equals(user.password);
+        return available == user.available && Objects.equals(id_user, user.id_user) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(salt, user.salt) && Objects.equals(hashPassword, user.hashPassword) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password, role);
+        return Objects.hash(id_user, name, email, password, salt, hashPassword, role, available);
     }
 }

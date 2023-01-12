@@ -17,9 +17,9 @@ public class Database {
     public final static List<Product> LIST_PRODUCTS = new ArrayList<>();
 
     static {
-        User user1 = new User("s.klunniy@gmail.com", "123", Role.ADMIN);
-        User user2 = new User("ava@gmail.com", "123", Role.USER);
-        User user3 = new User("5", "test", Role.USER);
+        User user1 = new User("s.klunniy@gmail.com", "123");
+        User user2 = new User("ava@gmail.com", "123");
+        User user3 = new User("5", "test");
 
         USER_LIST.add(user1);
         USER_LIST.add(user2);

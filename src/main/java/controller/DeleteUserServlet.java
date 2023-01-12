@@ -1,13 +1,10 @@
 package controller;
 
-import exception.TAException;
+import exception.TEAppException;
 import factory.UserServiceFactory;
 import service.UserService;
-import service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,14 +23,14 @@ public class DeleteUserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, TAException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, TEAppException {
         String userIdToDelete = req.getParameter("id_user");
         if (userIdToDelete != null) {
             int deleteUser = userService.deleteUserById(Long.parseLong(userIdToDelete));
             if (deleteUser == 1)
                 req.getRequestDispatcher("/admin/users").forward(req, resp);
         }
-        throw new TAException();
+        throw new TEAppException();
     }
 
 }

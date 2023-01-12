@@ -1,5 +1,6 @@
 package controller;
 
+import exception.TEAppException;
 import model.User;
 import org.apache.log4j.Logger;
 import service.UserService;
@@ -9,8 +10,10 @@ import utils.HashUtils;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -34,34 +37,38 @@ public class LoginUserServlet extends HttpServlet {
 //todo: как мне сделать при возврате на главную страницу что бы убралось поле
 //мы сразу можем перейти на main_menu.jsp - а так не должно быть
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html");
-
-//        req.setAttribute("error", null);
-
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-
         try {
-            password = HashUtils.getSHA256SecurePassword(password);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+            req.setCharacterEncoding("UTF-8");
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html");
 
-        Optional<User> optUserByLoginPassword = userService.findUserByLoginPassword(email, password);
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
 
-        if (optUserByLoginPassword.isPresent() && optUserByLoginPassword.get().isAvailable()) {
-            HttpSession session = req.getSession();
-            session.setAttribute("user", optUserByLoginPassword.get());
+            try {
+                password = HashUtils.getSHA256SecurePassword(password);
+            } catch (NoSuchAlgorithmException e) {
+                throw new TEAppException(e);
+            }
+
+            Optional<User> optUserByLoginPassword = userService.findUserByLoginPassword(email, password);
+
+            if (optUserByLoginPassword.isPresent() && optUserByLoginPassword.get().isAvailable()) {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", optUserByLoginPassword.get());
 //            resp.addCookie(new Cookie("adminTE", "TE"));
-            req.getRequestDispatcher("main_menu.jsp").forward(req, resp);
-        } else {
-            String error = "Ваш логин и пароль неверный!";
-            req.setAttribute("error", error);
+                req.getRequestDispatcher("main_menu.jsp").forward(req, resp);
+            } else {
+                String error = "Ваш логин и пароль неверный!";
+                req.setAttribute("error", error);
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            }
+
+        } catch (Exception e) {
+            logger.error("login error, exception=" + e);
+            req.setAttribute("error", " login error, enter correct data");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
 
     }
-
 }

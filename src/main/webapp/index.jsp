@@ -9,9 +9,9 @@
 </head>
 <body>
 
-
-
 <div style="text-align: center;">
+
+
     <h4>
         <%
             String error = (String) request.getAttribute("error");
@@ -19,17 +19,19 @@
                 response.getWriter().write(error);
             }
         %>
+       </span>
     </h4>
 
     <h2>Login</h2>
     <form action="/login" method="post">
-        Введите email: <input name="email" type="text"> <br>
-        Введите password: <input name="password" type="password"> <br>
+        Введите name <input name="name" type="text"/> <br>
+        Введите email <input name="email" type="text"/> <br>
+        Введите password <input name="password" type="text"/> <br>
         <button type="submit">Enter</button>
-        <br>
     </form>
 
 
+    <br>
     <br>
     Еще не зарегистрированы?
     <br>
@@ -41,3 +43,11 @@
 </div>
 </body>
 </html>
+
+
+<script>
+
+    function show(numb){
+        alert("!!!!!!!!!!!!!");
+    }
+</script>
