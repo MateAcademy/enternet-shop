@@ -1,13 +1,9 @@
 package controller;
 
 import factory.UserServiceFactory;
-import lombok.SneakyThrows;
 import model.User;
 import org.apache.log4j.Logger;
 import service.UserService;
-import service.impl.UserServiceImpl;
-import utils.HashUtils;
-import utils.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +19,11 @@ import java.util.Optional;
 /**
  * @author Sergey Klunniy
  */
-@WebServlet(value = "/register1", loadOnStartup = 1)
+@WebServlet(value = "/register1", loadOnStartup = 2)
 public class UserRegistration1Servlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(UserRegistration1Servlet.class);
-    private int tryToRegister = 2;
+    private final int tryToRegister = 2;
     private int countTryToRegister = 0;
     private static final UserService userService = UserServiceFactory.getUserService();
 
@@ -74,7 +70,6 @@ public class UserRegistration1Servlet extends HttpServlet {
             if (isRegistered != null && isRegistered.equals("true") && !Objects.equals(role, "admin")) {
                 logger.debug("session isRegistered = true");
                 accessError(resp);
-                return;
             }
 
             Optional<User> findUserByEmail = userService.findUserByEmail(email);
@@ -82,7 +77,6 @@ public class UserRegistration1Servlet extends HttpServlet {
             if (findUserByEmail.isPresent()) {
                 logger.debug("findUserByEmail = true, access exit");
                 accessError(resp);
-                return;
             } else {
                 User user = new User(name, email, password);
                 userService.addUser(user);

@@ -6,6 +6,7 @@ import model.Product;
 import service.ProductService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Sergey Klunniy
@@ -30,4 +31,9 @@ public class ProductServiceImpl implements ProductService {
     public int deleteProductById(long idProduct) {
         return productDao.deleteProductById(idProduct);
     }
+
+    @Override
+    public Optional<Product> getProductById(long idProduct) {
+        return productDao.getProductById(idProduct);
+    };
 }

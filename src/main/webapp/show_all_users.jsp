@@ -12,7 +12,7 @@
 <body>
 
 <a href="/mainMenuServlet"> Назад </a> <br>
-<a href="/add_user.jsp"> Регистрация нового пользователя </a> <br>
+<a href="/register"> Регистрация нового пользователя </a> <br>
 <!--tr-строка  td-ячейка -->
 <%--<table>--%>
 <%--    <%--%>

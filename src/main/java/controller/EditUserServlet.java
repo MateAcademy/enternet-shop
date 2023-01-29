@@ -1,6 +1,5 @@
 package controller;
 
-import exception.TEAppException;
 import factory.UserServiceFactory;
 import model.User;
 import org.apache.log4j.Logger;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/admin/edit")
@@ -59,12 +57,7 @@ public class EditUserServlet extends HttpServlet {
 
                 req.getRequestDispatcher("/admin/edite_user.jsp").forward(req, resp);
             }
-
-//            if (deleteUser == 1)
-//                req.getRequestDispatcher("/admin/users").forward(req, resp);
-//        }
-//            throw new TEAppException();
         }
-
     }
+
 }

@@ -34,4 +34,9 @@ public class ProductDaoImpl implements ProductDao {
         }
         return 0;
     }
+
+    @Override
+    public Optional<Product> getProductById(long idProduct) {
+        return Optional.empty();
+    }
 }

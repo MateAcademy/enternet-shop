@@ -23,9 +23,9 @@ import java.util.Optional;
  * @author Sergey Klunniy
  */
 //@WebServlet(value = "/register", loadOnStartup = 1)
-public class UserRegistrationServlet extends HttpServlet {
+public class UserRegistration2Servlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(UserRegistrationServlet.class);
+    private static final Logger logger = Logger.getLogger(UserRegistration2Servlet.class);
     private int tryToRegister = 2;
     private int countTryToRegister = 0;
     private static final UserService userService = UserServiceFactory.getUserService();

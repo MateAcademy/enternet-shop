@@ -27,7 +27,7 @@ public class MainMenuServlet extends HttpServlet {
 
        if (Objects.equals(role, "admin")) {
            req.getRequestDispatcher("/main_menu_admin.jsp").forward(req, resp);
-       } else if (Objects.equals(role, "uer")){
+       } else if (Objects.equals(role, "user")){
            req.getRequestDispatcher("/main_menu.jsp").forward(req, resp);
        }
     }

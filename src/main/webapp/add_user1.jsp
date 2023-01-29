@@ -24,7 +24,7 @@
     </h4>
     <a href="/mainMenuServlet"> Назад </a>
     <br>
-    <form action="/register" method="post">
+    <form action="/register1" method="post">
         Name <input name="name" type="text"> <br>
         Email <input name="email" type="email"> <br>
         password <input name="password" type="password"> <br>

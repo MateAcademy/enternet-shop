@@ -1,13 +1,17 @@
 package dao.impl;
 
 import dao.ProductDao;
+import exception.TEAppException;
 import model.Product;
+import model.User;
 import org.apache.log4j.Logger;
 import utils.DbConnector;
+import utils.Role;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Sergey Klunniy
@@ -65,6 +69,37 @@ public class ProductDaoJDBCImpl implements ProductDao {
             return isDeleteProduct;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Optional<Product> getProductById(long idProduct) {
+        String sql = "SELECT * FROM products WHERE id_product = ?";
+        try (Connection connection = DbConnector.connect()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, idProduct);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            Product product = null;
+            if (resultSet.next()) {
+                long id_productFromDB = resultSet.getLong("id_product");
+                String nameFromDB = resultSet.getString("name");
+                String priceFromDB = resultSet.getString("price");
+                String descriptionFromDB = resultSet.getString("description");
+
+                product = new Product(id_productFromDB, nameFromDB, Double.parseDouble(priceFromDB), descriptionFromDB);
+            }
+            Optional<Product> productOptional;
+            if (product != null)
+                productOptional = Optional.of(product);
+            else {
+                productOptional = Optional.empty();
+            }
+            return productOptional;
+        } catch (Exception e) {
+            logger.error("we in getProductById() method, exception=" + e);
+            throw new TEAppException("cannot fined user to email in method getUserById(), exception= " + e);
         }
     }
 }
