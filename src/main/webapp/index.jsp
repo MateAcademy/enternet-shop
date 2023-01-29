@@ -39,7 +39,6 @@
 
 
 <script>
-
     function show(numb){
         alert("!!!!!!!!!!!!!");
     }

@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>index.jsp</title>
 </head>
-
 <body>
-
-
 <div style="text-align: center;">
     <h4>
         <%

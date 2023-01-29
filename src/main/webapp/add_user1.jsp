@@ -16,13 +16,13 @@
 <body>
 <center>
     <h4>
-      <%    String error = (String) request.getAttribute("error");
+        <%    String error = (String) request.getAttribute("error");
             if (error!=null) {
-            response.getWriter().write(error);
+                response.getWriter().write(error);
             }
-      %>
+        %>
     </h4>
-    <a href="/admin/users"> Назад </a>
+    <a href="/mainMenuServlet"> Назад </a>
     <br>
     <form action="/register" method="post">
         Name <input name="name" type="text"> <br>

@@ -13,10 +13,10 @@
 </head>
 <body>
 <a href="/start"> На страницу входа </a> <br>
-Welcome! Ypu can register if you want: <br>
-<a href="/register"> Регистрация юзера </a> <br>
+Welcome! You can register if you want: <br>
+<a href="/register1"> Регистрация юзера </a> <br>
 <a href="/admin/users"> Список всех юзеров </a> <br>
-<a href="/addProducts"> Добавить товар в Базу Данных </a><br>
+<a href="/addProducts1"> Добавить товар в Базу Данных </a><br>
 <a href="/getAllProducts"> Вывести весь товар </a>
 
 </body>

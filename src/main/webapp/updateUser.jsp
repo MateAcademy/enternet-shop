@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="/main_menu.jsp"> Назад </a> <br>
+<a href="/mainMenuServlet"> Назад </a> <br>
 
 <table border='2' width="80%">
     <tr>

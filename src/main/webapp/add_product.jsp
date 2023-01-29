@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<a href="/main_menu.jsp"> Назад </a> <br>
+<a href="/getAllProducts"> Назад </a> <br>
 <center>
     Page add items:
     <form action="/addProducts" method="post">
