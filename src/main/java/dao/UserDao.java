@@ -16,7 +16,9 @@ public interface UserDao {
     Optional<User> findUserByLoginPassword(String email, String password);
     int deleteUserById(long id);
 
-    boolean findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 
     void updateUser(User user);
+
+    Optional<User> getUserById(long id);
 }

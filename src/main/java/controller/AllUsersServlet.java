@@ -2,8 +2,10 @@ package controller;
 
 import factory.UserServiceFactory;
 import model.User;
+import org.apache.log4j.Logger;
 import service.UserService;
 import service.impl.UserServiceImpl;
+import utils.AppConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static utils.AppConstants.*;
+
 /**
  * @author Sergey Klunniy
  */
 @WebServlet(value = "/admin/users")
 public class AllUsersServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(AllUsersServlet.class);
 
     private static final UserService userService = UserServiceFactory.getUserService();
 
@@ -28,9 +34,11 @@ public class AllUsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> allUsers = userService.getAll();
-            req.setAttribute("allUsers", allUsers);
-            req.getRequestDispatcher("/show_all_users.jsp").forward(req, resp);
+        userList = userService.getAll();
+        logger.info("initialize userList in AllUsersServlet");
+
+        req.setAttribute("allUsers", userList);
+        req.getRequestDispatcher("/show_all_users.jsp").forward(req, resp);
     }
 
 }

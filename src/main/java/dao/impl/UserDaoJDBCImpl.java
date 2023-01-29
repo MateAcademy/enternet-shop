@@ -5,8 +5,10 @@ import model.User;
 import org.apache.log4j.Logger;
 import utils.DbConnector;
 import exception.TEAppException;
+import utils.Role;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -30,7 +32,7 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setString(4, user.getSalt());
             ps.setString(5, user.getHashPassword());
             ps.setString(6, user.getRole().toString().toLowerCase(Locale.ROOT));
-            ps.setBoolean(7, user.isAvailable());
+            ps.setBoolean(7, true);
             ps.executeUpdate();
 
             logger.debug("add user to db: " + user);
@@ -41,30 +43,31 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-//        List<User> userList = new ArrayList<>();
-//        try (Connection connection = DbConnector.connect()) {
-//            String sql = "SELECT * FROM users";
-//
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery(sql);
-//
-//            while (resultSet.next()) {
-//                User userFromDb = new User(
-//                        resultSet.getLong("id_user"),
-//                        resultSet.getString("name"),
-//                        resultSet.getString("email"),
-//                        resultSet.getString("password"),
-//                        resultSet.getString("salt"),
-//                        Role.valueOf(resultSet.getString("role")),
-//                        resultSet.getBoolean("available")
-//                );
-//                userList.add(userFromDb);
-//            }
-//            logger.info("get all users to db");
-//            return userList;
-//        } catch (SQLException e) {
-//            logger.error("can't add user to db, " + e);
-//        }
+        List<User> userList = new ArrayList<>();
+        try (Connection connection = DbConnector.connect()) {
+            String sql = "SELECT * FROM users";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                User userFromDb = new User(
+                        resultSet.getLong("id_user"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        Role.valueOf(resultSet.getString("role").toUpperCase()),
+                        resultSet.getBoolean("available"),
+                        resultSet.getString("name"),
+                        resultSet.getString("salt"),
+                        resultSet.getString("hash_password")
+                        );
+                userList.add(userFromDb);
+            }
+            logger.info("get all users to db");
+            return userList;
+        } catch (SQLException e) {
+            logger.error("can't add user to db, " + e);
+        }
         return null;
     }
 
@@ -125,25 +128,39 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     @Override
-    public boolean findUserByEmail(String email)  {
+    public Optional<User> findUserByEmail(String email)  {
         String sql = "Select * from users where email = ?";
         try (Connection connection = DbConnector.connect()) {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, email);
 
             ResultSet resultSet = ps.executeQuery();
+
+//                logger.info("ошибка при поиске юзера в БД по email, в методе findUserByEmail email: " + email );
+                User user = null;
             if (resultSet.next()) {
-                logger.info("ошибка при добавлении юзера в БД,  в поиске по email в методе (findUserByEmail( " + email + " )) такой юзер уже есть в БД");
-                return true;
-            } else {
-                logger.info("при добавлении юзера в БД, в поиске по email  в методе (findUserByEmail( " + email + " )) такого юзера не нашли, значит можно добавлять нового юзера, все ок!");
-                return false;
+                long id_userFromDB = resultSet.getLong("id_user");
+                String nameFromDB = resultSet.getString("name");
+                String emailFromDB = resultSet.getString("email");
+                String passwordFromDB = resultSet.getString("password");
+                String saltFromDB = resultSet.getString("salt");
+                String hashPasswordFromDB = resultSet.getString("hash_password");
+                Role roleFromBB = Role.valueOf(resultSet.getString("role").toUpperCase());
+                boolean availableFromDB = resultSet.getBoolean("available");
+                user = new User(id_userFromDB, nameFromDB, emailFromDB, passwordFromDB, saltFromDB, hashPasswordFromDB,
+                        roleFromBB, availableFromDB);
             }
+            Optional<User> userOptional;
+            if (user != null)
+                userOptional = Optional.of(user);
+            else {
+                userOptional = Optional.empty();
+            }
+            return userOptional;
         } catch (Exception e) {
             logger.error("we in findUserByEmail() method, exception = " + e);
             throw new TEAppException("cannot fined user to email in method findUserByEmail(), exception= " + e);
         }
-
     }
 
     @Override
@@ -169,6 +186,41 @@ public class UserDaoJDBCImpl implements UserDao {
             logger.info("add user to db: " + user);
         } catch (SQLException e) {
             logger.error("can't add user to db, user: " + user + ", exception:" + e);
+        }
+    }
+
+    @Override
+    public Optional<User> getUserById(long id) {
+        String sql = "SELECT * FROM users WHERE id_user = ?";
+        try (Connection connection = DbConnector.connect()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, id);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            User user = null;
+            if (resultSet.next()) {
+                long id_userFromDB = resultSet.getLong("id_user");
+                String nameFromDB = resultSet.getString("name");
+                String emailFromDB = resultSet.getString("email");
+                String passwordFromDB = resultSet.getString("password");
+                String saltFromDB = resultSet.getString("salt");
+                String hashPasswordFromDB = resultSet.getString("hash_password");
+                Role roleFromBB = Role.valueOf(resultSet.getString("role").toUpperCase());
+                boolean availableFromDB = resultSet.getBoolean("available");
+                user = new User(id_userFromDB, nameFromDB, emailFromDB, passwordFromDB, saltFromDB, hashPasswordFromDB,
+                        roleFromBB, availableFromDB);
+            }
+            Optional<User> userOptional;
+            if (user != null)
+                userOptional = Optional.of(user);
+            else {
+                userOptional = Optional.empty();
+            }
+            return userOptional;
+        } catch (Exception e) {
+            logger.error("we in getUserById() method, exception = " + e);
+            throw new TEAppException("cannot fined user to email in method getUserById(), exception= " + e);
         }
     }
 }

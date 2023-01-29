@@ -41,12 +41,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
 
     @Override
     public void updateUser(User user) {
         userDao.updateUser(user);
+    }
+
+    @Override
+    public Optional<User> getUserById(long id) {
+        return userDao.getUserById(id);
     }
 }

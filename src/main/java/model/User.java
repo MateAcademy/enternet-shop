@@ -43,12 +43,39 @@ public class User {
         return available;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Long id_user, String name, String email, String password, Role role, boolean available) {
+        this.id_user = id_user;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.salt = HashUtils.getRandomSalt();;
+        this.hashPassword = HashUtils.getSHA256SecurePassword(password, salt);
+        this.role = role;
+        this.available = available;
+    }
+
+    public User(Long id_user, String email, String password, Role role, boolean available, String name, String salt, String hashPassword) {
+        this.id_user = id_user;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+        this.hashPassword = hashPassword;
+        this.role = role;
+        this.available = available;
+    }
+
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        salt = HashUtils.getRandomSalt();;
-        this.hashPassword = HashUtils.getSHA256SecurePassword(password, salt);;
+        this.salt = HashUtils.getRandomSalt();;
+        this.hashPassword = HashUtils.getSHA256SecurePassword(password, salt);
         this.role = Role.USER;
     }
 
@@ -59,11 +86,6 @@ public class User {
         this.password = password;
         this.role = role;
         this.available = available;
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
     }
 
     @Override

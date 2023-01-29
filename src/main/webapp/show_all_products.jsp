@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<a href="/main_menu.jsp"> Назад </a> <br>
+<a href="/mainMenuServlet"> Назад </a> <br>
 <a href="/add_product.jsp"> Регистрация нового товара </a> <br>
 <!--tr-строка  td-ячейка -->
 <%--<table>--%>

@@ -61,12 +61,17 @@ public class  UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean findUserByEmail(String email) {
-        return false;
+    public Optional<User> findUserByEmail(String email) {
+        return Optional.empty();
     }
 
     @Override
     public void updateUser(User user) {
 
+    }
+
+    @Override
+    public Optional<User> getUserById(long id) {
+        return null;
     }
 }
