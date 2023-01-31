@@ -1,13 +1,9 @@
-package controller;
+package controller.product;
 
 import factory.ProductServiceFactory;
-import factory.UserServiceFactory;
 import model.Product;
-import model.User;
 import org.apache.log4j.Logger;
 import service.ProductService;
-import service.UserService;
-import utils.AppConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

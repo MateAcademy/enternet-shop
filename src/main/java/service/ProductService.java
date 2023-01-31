@@ -10,8 +10,10 @@ import java.util.Optional;
  */
 public interface ProductService {
 
-    void addItem(Product product);
+    void addProduct(Product product);
     List<Product> getAll();
     int deleteProductById(long parseLong);
     Optional<Product> getProductById(long idProduct);
+
+    void updateProduct(Product product);
 }

@@ -11,14 +11,10 @@
     <title>Edite user</title>
 </head>
 <body>
-
 <table border='2' width="80%">
-
-
     <h2> Отредактируйте данные:</h2>
     <br>
-
-    <form action="/admin/editDataUser" method="post">
+    <form action="/admin/editUserData" method="post">
         <p> Name <input name="name" type="text" value="<%=request.getAttribute("name")%>"></p>
         <p> Email <input name="email" type="email" value="<%=request.getAttribute("email")%>"></p>
         <p> Password <input name="password" type="password" value="<%=request.getAttribute("password")%>"></p>
@@ -26,7 +22,6 @@
         <p> Available<input name="available" type="text" value="<%=request.getAttribute("available")%>"></p>
         <input type="submit" value="Change data">
     </form>
-
 </table>
 </body>
 </html>

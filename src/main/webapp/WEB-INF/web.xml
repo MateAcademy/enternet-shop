@@ -5,7 +5,7 @@
 
   <servlet>
     <servlet-name>UserRegistrationServlet</servlet-name>
-    <servlet-class>controller.UserRegistrationServlet</servlet-class>
+    <servlet-class>controller.user.UserRegistrationServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
@@ -16,7 +16,7 @@
 
   <servlet>
     <servlet-name>ItemServlet</servlet-name>
-    <servlet-class>controller.AddProductServlet</servlet-class>
+    <servlet-class>controller.product.AddProductServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

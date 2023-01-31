@@ -1,13 +1,9 @@
-package controller;
+package controller.user;
 
 import factory.UserServiceFactory;
-import lombok.SneakyThrows;
 import model.User;
 import org.apache.log4j.Logger;
 import service.UserService;
-import service.impl.UserServiceImpl;
-import utils.HashUtils;
-import utils.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,9 +19,9 @@ import java.util.Optional;
  * @author Sergey Klunniy
  */
 //@WebServlet(value = "/register", loadOnStartup = 1)
-public class UserRegistration2Servlet extends HttpServlet {
+public class UserRegistrationServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(UserRegistration2Servlet.class);
+    private static final Logger logger = Logger.getLogger(UserRegistrationServlet.class);
     private int tryToRegister = 2;
     private int countTryToRegister = 0;
     private static final UserService userService = UserServiceFactory.getUserService();

@@ -16,4 +16,6 @@ public interface ProductDao {
 
     Optional<Product> getProductById(long idProduct);
 
+    void updateProduct(Product product);
+
 }

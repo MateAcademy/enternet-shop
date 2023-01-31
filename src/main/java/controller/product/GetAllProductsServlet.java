@@ -1,4 +1,4 @@
-package controller;
+package controller.product;
 
 import factory.ProductServiceFactory;
 import model.Product;

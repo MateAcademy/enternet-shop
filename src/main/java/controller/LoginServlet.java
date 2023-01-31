@@ -15,9 +15,9 @@ import java.util.Objects;
  * @author Sergey Klunniy
  */
 @WebServlet("/login")
-public class LoginUserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
-    private Logger logger = Logger.getLogger(LoginUserServlet.class);
+    private Logger logger = Logger.getLogger(LoginServlet.class);
 
     //    private static final UserDao userDao = UserDAOFactory.getUserDao();
     private final UserService userService = new UserServiceImpl();

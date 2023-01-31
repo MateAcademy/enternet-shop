@@ -71,7 +71,7 @@
             <td><c:out value="${product.name}"/></td>
             <td><c:out value="${product.price}"/></td>
             <td><c:out value="${product.description}"/></td>
-            <td><a href='/edit?id_product=${product.id_product}'>edit</a></td>
+            <td><a href='/admin/editProduct?id_product=${product.id_product}'>edit</a></td>
             <td><a href='/admin/deleteProduct?id_product=${product.id_product}'>delete</a></td>
         </tr>
     </c:forEach>

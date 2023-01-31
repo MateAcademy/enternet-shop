@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import exception.TEAppException;
 import factory.UserServiceFactory;

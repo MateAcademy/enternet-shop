@@ -183,9 +183,9 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setLong(8, user.getId_user());
 
             ps.executeUpdate();
-            logger.info("add user to db: " + user);
+            logger.info("update user to db: " + user);
         } catch (SQLException e) {
-            logger.error("can't add user to db, user: " + user + ", exception:" + e);
+            logger.error("can't update user to db, user: " + user + ", exception:" + e);
         }
     }
 

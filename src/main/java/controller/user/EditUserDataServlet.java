@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import factory.UserServiceFactory;
 import model.User;
@@ -6,17 +6,15 @@ import org.apache.log4j.Logger;
 import service.UserService;
 import utils.Role;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author Sergey Klunniy
  */
-@WebServlet("/admin/editDataUser")
+@WebServlet("/admin/editUserData")
 public class EditUserDataServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(EditUserDataServlet.class);

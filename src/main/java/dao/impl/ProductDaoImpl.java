@@ -39,4 +39,9 @@ public class ProductDaoImpl implements ProductDao {
     public Optional<Product> getProductById(long idProduct) {
         return Optional.empty();
     }
+
+    @Override
+    public void updateProduct(Product product) {
+
+    }
 }

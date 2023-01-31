@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import factory.UserServiceFactory;
 import model.User;
@@ -36,7 +36,7 @@ public class EditUserServlet extends HttpServlet {
             editeOptionalUserFromDb = userService.getUserById(Long.parseLong(userIdToDelete));
 
             User userFromAppConstant = null;
-            for (User user1 : AppConstants.userList) {
+            for (User user1 : AppConstants.getInstance().getUserList()) {
                 if (userIdToDelete.equals(String.valueOf(user1.getId_user()))) {
                     userFromAppConstant = user1;
                     break;

@@ -16,8 +16,8 @@ public class ProductServiceImpl implements ProductService {
     private static final ProductDao productDao = ProductDaoFactory.getItemDao();
 
     @Override
-    public void addItem(Product product) {
-        if (product !=null) {
+    public void addProduct(Product product) {
+        if (product != null) {
             productDao.addProduct(product);
         }
     }
@@ -35,5 +35,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> getProductById(long idProduct) {
         return productDao.getProductById(idProduct);
-    };
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        productDao.updateProduct(product);
+    }
 }

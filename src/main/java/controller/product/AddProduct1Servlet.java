@@ -1,7 +1,8 @@
-package controller;
+package controller.product;
 
 import factory.ProductServiceFactory;
 import model.Product;
+import org.apache.log4j.Logger;
 import service.ProductService;
 
 import javax.servlet.ServletException;
@@ -11,18 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author Sergey Klunniy
- */
-//@WebServlet("/addProducts")
-public class AddProductServlet extends HttpServlet {
+@WebServlet("/addProducts1")
+public class AddProduct1Servlet extends HttpServlet {
 
-    private ProductService itemService = ProductServiceFactory.getProductService();
-    private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(AddProduct1Servlet.class);
+    private final ProductService productService = ProductServiceFactory.getProductService();
+    private static final long serialVersionUID = 4892911750891991L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/add_product.jsp").forward(req, resp);
+        req.getRequestDispatcher("/add_product1.jsp").forward(req, resp);
     }
 
     @Override
@@ -33,11 +32,13 @@ public class AddProductServlet extends HttpServlet {
             String description = req.getParameter("description");
 
             Double priceDouble = Double.parseDouble(price);
-            itemService.addItem(new Product(name, priceDouble, description));
-            resp.sendRedirect("/getAllProducts");
-        } catch (Exception ex) {
-//Todo: если ввожу логин и один пароль
-            //Вывести на страничку если такой товар уже есть то ввести заново другой:
+            productService.addProduct(new Product(name, priceDouble, description));
+
+            logger.info("AddProduct1Servlet, we add product to db");
+            resp.sendRedirect("/mainMenuServlet");
+        } catch (Exception e) {
+            logger.error("AddProduct1Servlet, we cannot add product to db, exception=" + e);
+            resp.sendRedirect("/mainMenuServlet");
         }
 
     }

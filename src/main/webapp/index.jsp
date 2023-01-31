@@ -16,23 +16,28 @@
                 response.getWriter().write(error);
             }
         %>
-       </span>
     </h4>
 
     <h2>Login</h2>
     <form action="/login" method="post">
-        Введите name <input name="name" type="text"/> <br>
-        Введите email <input name="email" type="text"/> <br>
-        Введите password <input name="password" type="text"/> <br>
+        Enter email: <input name="email" type="email"/> <br>
+        Enter password: <input name="password" type="password"/> <br>
         <button type="submit">Enter</button>
     </form>
 
     <br>
-    Еще не зарегистрированы?
+    You are not registered yet?
     <br>
     <p>
-        <button type="submit"> <a href="/register">Зарегистрироваться</a></button>
+        <button type="submit"> <a href="/register">Registration</a></button>
     </p>
+
+
+    If you forgot your password, please enter your email address:
+    <form action="/forgotPassword" method="post">
+        Enter email:<input name="email" type="email"/>
+        <button type="submit">Enter</button>
+    </form>
 </div>
 </body>
 </html>

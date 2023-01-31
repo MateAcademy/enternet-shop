@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import factory.UserServiceFactory;
 import model.User;
