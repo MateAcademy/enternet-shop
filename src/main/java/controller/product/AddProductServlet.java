@@ -2,6 +2,7 @@ package controller.product;
 
 import factory.ProductServiceFactory;
 import model.Product;
+import org.apache.log4j.Logger;
 import service.ProductService;
 
 import javax.servlet.ServletException;
@@ -13,8 +14,8 @@ import java.io.IOException;
 //@WebServlet("/addProducts")
 public class AddProductServlet extends HttpServlet {
 
-    private ProductService itemService = ProductServiceFactory.getProductService();
-    private static final long serialVersionUID = 4892911750891992L;
+    private static final Logger logger = Logger.getLogger(AddProductServlet.class);
+    private ProductService productService = ProductServiceFactory.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,12 +30,14 @@ public class AddProductServlet extends HttpServlet {
             String description = req.getParameter("description");
 
             Double priceDouble = Double.parseDouble(price);
-            itemService.addProduct(new Product(name, priceDouble, description));
-            resp.sendRedirect("/getAllProducts");
-        } catch (Exception ex) {
-//Todo: если ввожу логин и один пароль
-            //Вывести на страничку если такой товар уже есть то ввести заново другой:
-        }
+            productService.addProduct(new Product(name, priceDouble, description));
 
+            logger.info("we add product to database");
+            resp.sendRedirect("/getAllProducts");
+        } catch (Exception e) {
+            logger.error("we can't add product to database, exception=" + e);
+            resp.sendRedirect("/mainMenuServlet");
+        }
     }
+
 }

@@ -3,15 +3,12 @@ package dao.impl;
 import dao.ProductDao;
 import exception.TEAppException;
 import model.Product;
-import model.User;
 import org.apache.log4j.Logger;
 import utils.DbConnector;
-import utils.Role;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -125,5 +122,36 @@ public class ProductDaoJDBCImpl implements ProductDao {
         } catch (SQLException e) {
             logger.error("can't update product to db, product: " + product + ", exception:" + e);
         }
+    }
+
+    @Override
+    public Optional<Product> getProductByName(String nameProduct) {
+        String sql = "SELECT * FROM products WHERE name = ?";
+        try (Connection connection = DbConnector.connect()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, nameProduct);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            Product product = null;
+            if (resultSet.next()) {
+                long id_productFromDB = resultSet.getLong("id_product");
+                String nameFromDB = resultSet.getString("name");
+                String priceFromDB = resultSet.getString("price");
+                String descriptionFromDB = resultSet.getString("description");
+
+                product = new Product(id_productFromDB, nameFromDB, Double.parseDouble(priceFromDB), descriptionFromDB);
+            }
+
+            if (product != null) {
+                Optional<Product> productOptional = Optional.of(product);
+                logger.debug("we fined product in database by name");
+                return productOptional;
+            }
+        } catch (Exception e) {
+            logger.error("we can't fined product in database, exception= " + e);
+        }
+        logger.debug("we can't fined product in database by name");
+        return Optional.empty();
     }
 }

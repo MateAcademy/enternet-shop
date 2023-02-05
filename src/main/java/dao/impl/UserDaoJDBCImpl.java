@@ -21,10 +21,8 @@ public class UserDaoJDBCImpl implements UserDao {
     public void addUser(User user) {
         String sql = "insert into users(name, email, password, salt, hash_password, role, available) VALUES (?, ?, ?, ?, ?, ?::role_enum, ?)";
 
-        //Connection: Создание и управление соединениями
         try (Connection connection = DbConnector.connect()) {
             assert connection != null;
-            //PreparedStatement: выполнение и управление запросами к базе данных
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
@@ -35,9 +33,9 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setBoolean(7, true);
             ps.executeUpdate();
 
-            logger.debug("add user to db: " + user);
+            logger.debug("add user to database, email= " + user.getEmail() + ", password= " + user.getPassword());
         } catch (SQLException e) {
-            logger.error("can't add user to db, user: " + user + ", exception:" + e);
+            logger.error("can't add user to database, user: " + user + ", exception:" + e);
         }
     }
 
@@ -60,7 +58,7 @@ public class UserDaoJDBCImpl implements UserDao {
                         resultSet.getString("name"),
                         resultSet.getString("salt"),
                         resultSet.getString("hash_password")
-                        );
+                );
                 userList.add(userFromDb);
             }
             logger.info("get all users to db");
@@ -128,7 +126,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email)  {
+    public Optional<User> findUserByEmail(String email) {
         String sql = "Select * from users where email = ?";
         try (Connection connection = DbConnector.connect()) {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -137,7 +135,7 @@ public class UserDaoJDBCImpl implements UserDao {
             ResultSet resultSet = ps.executeQuery();
 
 //                logger.info("ошибка при поиске юзера в БД по email, в методе findUserByEmail email: " + email );
-                User user = null;
+            User user = null;
             if (resultSet.next()) {
                 long id_userFromDB = resultSet.getLong("id_user");
                 String nameFromDB = resultSet.getString("name");

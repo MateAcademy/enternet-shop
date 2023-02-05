@@ -15,6 +15,7 @@ public interface ProductDao {
     int deleteProductById(long parseLong);
 
     Optional<Product> getProductById(long idProduct);
+    Optional<Product> getProductByName(String nameProduct);
 
     void updateProduct(Product product);
 

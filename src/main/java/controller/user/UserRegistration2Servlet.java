@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import service.UserService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ import java.util.Optional;
 /**
  * @author Sergey Klunniy
  */
-//@WebServlet(value = "/register", loadOnStartup = 1)
+@WebServlet(value = "/register2", loadOnStartup = 1)
 public class UserRegistration2Servlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(UserRegistration2Servlet.class);

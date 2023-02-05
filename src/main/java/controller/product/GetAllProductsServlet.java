@@ -33,7 +33,12 @@ public class GetAllProductsServlet extends HttpServlet {
         List<Product> productList = productService.getAll();
         req.setAttribute("productList", productList);
         HttpSession session = req.getSession();
-        String role = (String) session.getAttribute("role");
+
+        Object roleFromSession = session.getAttribute("role");
+        String role = null;
+        if (roleFromSession != null) {
+            role = String.valueOf(roleFromSession).toLowerCase();
+        }
 
         if (role != null) {
             role = role.toLowerCase();

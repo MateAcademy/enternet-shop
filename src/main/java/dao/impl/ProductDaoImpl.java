@@ -42,6 +42,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void updateProduct(Product product) {
+    }
 
+    @Override
+    public Optional<Product> getProductByName(String nameProduct) {
+        return Optional.empty();
     }
 }

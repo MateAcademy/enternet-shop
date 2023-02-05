@@ -4,14 +4,14 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>UserRegistrationServlet</servlet-name>
-    <servlet-class>controller.user.UserRegistrationServlet</servlet-class>
+    <servlet-name>UserRegistration3Servlet</servlet-name>
+    <servlet-class>controller.user.UserRegistration3Servlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>UserRegistrationServlet</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <servlet-name>UserRegistration3Servlet</servlet-name>
+    <url-pattern>/register3</url-pattern>
   </servlet-mapping>
 
   <servlet>

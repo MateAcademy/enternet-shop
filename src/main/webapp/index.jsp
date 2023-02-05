@@ -29,7 +29,7 @@
     You are not registered yet?
     <br>
     <p>
-        <button type="submit"> <a href="/register">Registration</a></button>
+        <button type="submit"> <a href="/register3">Registration</a></button>
     </p>
 
 
@@ -41,10 +41,3 @@
 </div>
 </body>
 </html>
-
-
-<script>
-    function show(numb){
-        alert("!!!!!!!!!!!!!");
-    }
-</script>

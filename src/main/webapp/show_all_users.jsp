@@ -45,6 +45,8 @@
     <tr>
         <th>Email</th>
         <th>Password</th>
+        <th>Role</th>
+        <th>Available</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -52,6 +54,18 @@
         <tr>
             <td><c:out value="${user.email}"/></td>
             <td><c:out value="${user.password}"/></td>
+            <td><c:out value="${user.role}"/></td>
+            <td><c:out value="${user.available}"/></td>
+
+<%--            <td><a href='UserController?action=edit&nickname=<c:out value="${user.nickname}}"--%>
+<%--            action=edit&nickname=--%>
+<%--            action=delete&nickname=--%>
+<%--            /edit?nickname=--%>
+<%--            /delete?nickname=--%>
+<%--            /user {post, delete}--%>
+<%--            String action = request.getParameter(""action)--%>
+
+            <td><a href='/admin/edit?id_user=${user.id_user}'>edit</a></td>
             <td><a href='/admin/edit?id_user=${user.id_user}'>edit</a></td>
             <td><a href='/admin/deleteUser?id_user=${user.id_user}'>delete</a></td>
         </tr>
