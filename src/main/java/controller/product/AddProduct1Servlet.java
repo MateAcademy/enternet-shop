@@ -1,6 +1,5 @@
 package controller.product;
 
-import exception.TEAppException;
 import factory.ProductServiceFactory;
 import model.Product;
 import org.apache.log4j.Logger;
