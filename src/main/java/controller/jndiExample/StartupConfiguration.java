@@ -1,5 +1,6 @@
 package controller.jndiExample;
 
+import org.apache.log4j.Logger;
 import utils.DbConnector;
 
 import javax.naming.Context;
@@ -13,6 +14,7 @@ import javax.servlet.ServletContextListener;
  */
 public class StartupConfiguration implements ServletContextListener {
 
+    private static final Logger logger = Logger.getLogger(StartupConfiguration.class);
     private static final String URL = "java:comp/env/CONFIG_PROPERTIES_DATABASE_URL";
     private static final String LOGIN = "java:comp/env/CONFIG_PROPERTIES_DATABASE_LOGIN";
     private static final String PASSWORD = "java:comp/env/CONFIG_PROPERTIES_DATABASE_PASSWORD";
@@ -26,9 +28,13 @@ public class StartupConfiguration implements ServletContextListener {
             String login = (String) initialContext.lookup(LOGIN);
             String password = (String) initialContext.lookup(PASSWORD);
 
-            System.out.println(url);
-            System.out.println(login);
-            System.out.println(password);
+//          System.out.println(url);
+//          System.out.println(login);
+//          System.out.println(password);
+
+            logger.info("url " + url);
+            logger.info("login " + login);
+            logger.info("password " + url);
 
             DbConnector.getInstance(url, login, password);
 
