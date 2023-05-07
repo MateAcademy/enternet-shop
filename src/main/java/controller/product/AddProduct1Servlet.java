@@ -44,8 +44,8 @@ public class AddProduct1Servlet extends HttpServlet {
                 doGet(req, resp);
             }
         } catch (Exception e) {
-            logger.error("we can't add product to database, exception=" + e);
-            resp.sendRedirect("/mainMenuServlet");
+//            logger.error("we can't add product to database, exception=" + e);
+//            resp.sendRedirect("/mainMenuServlet");
         }
     }
     private boolean doesSuchAProductExist(String name) {

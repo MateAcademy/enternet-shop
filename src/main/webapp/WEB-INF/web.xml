@@ -24,4 +24,29 @@
     <url-pattern>/addProducts</url-pattern>
   </servlet-mapping>
 
+  <env-entry>
+    <description>URL to Database</description>
+    <env-entry-name>CONFIG_PROPERTIES_DATABASE_URL</env-entry-name>
+    <env-entry-value>jdbc:postgresql://localhost:5432/shop</env-entry-value>
+    <env-entry-type>java.lang.String</env-entry-type>
+  </env-entry>
+
+  <env-entry>
+    <description>Login to Database</description>
+    <env-entry-name>CONFIG_PROPERTIES_DATABASE_LOGIN</env-entry-name>
+    <env-entry-value>postgres</env-entry-value>
+    <env-entry-type>java.lang.String</env-entry-type>
+  </env-entry>
+
+  <env-entry>
+    <description>PASSWORD to Database</description>
+    <env-entry-name>CONFIG_PROPERTIES_DATABASE_PASSWORD</env-entry-name>
+    <env-entry-value>test</env-entry-value>
+    <env-entry-type>java.lang.String</env-entry-type>
+  </env-entry>
+
+  <listener>
+    <listener-class>controller.jndiExample.StartupConfiguration</listener-class>
+  </listener>
+
 </web-app>

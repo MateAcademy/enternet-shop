@@ -1,15 +1,11 @@
-package controller.rmi;
+package controller.jndiExample;
 
 import javax.naming.*;
-import javax.script.Bindings;
-import java.io.File;
+import java.io.*;
 import java.util.Properties;
 
-/**
- * @author Sergey Klunniy
- */
 public class Main {
-    public static void main(String[] args) throws NamingException {
+    public static void main(String[] args) throws NamingException, IOException {
         String name = "E:\\java-programms\\enternet-shop\\TrackensureConfiguration.properties";
 
         Properties props = new Properties();
@@ -18,19 +14,30 @@ public class Main {
 
         Context initialContext = new InitialContext(props);
 
-        File obj = (File)initialContext.lookup(name);
+        File obj = (File) initialContext.lookup(name);
         System.out.println(obj.getName());
+
         if (name.equals("")) {
             System.out.println("Looked up the initial context");
         } else {
             System.out.println(name + " is bound to: " + obj);
+
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(obj))) {
+                String line = bufferedReader.readLine();
+                while (line!=null) {
+                    System.out.println(line);
+                    line = bufferedReader.readLine();
+                }
+            } catch(Exception ex) {
+            }
+
         }
 
 //        list objects:
 //        NamingEnumeration list = initialContext.list("/");
 //        while (list.hasMore()) {
 //            NameClassPair nc = (NameClassPair) list.next();
-//            System.out.println(nc);
+//            System.out.println(nc);}
 
 //        NamingEnumeration bindings = initialContext.listBindings("/");
 //        while (bindings.hasMore()) {

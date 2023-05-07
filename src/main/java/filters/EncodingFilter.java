@@ -10,7 +10,6 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {"/*"})
 public class EncodingFilter implements Filter {
 
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
@@ -21,6 +20,7 @@ public class EncodingFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
+        chain.doFilter(request, response);
     }
 
     @Override
