@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author Sergey Klunniy
+ * @author Serhii Klunniy
  */
 @WebServlet(value = "/admin/users")
 public class AllUsersServlet extends HttpServlet {

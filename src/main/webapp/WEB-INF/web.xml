@@ -3,6 +3,10 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <listener>
+    <listener-class>controller.start.StartupConfiguration</listener-class>
+  </listener>
+
   <servlet>
     <servlet-name>UserRegistration3Servlet</servlet-name>
     <servlet-class>controller.user.UserRegistration3Servlet</servlet-class>
@@ -45,8 +49,35 @@
     <env-entry-type>java.lang.String</env-entry-type>
   </env-entry>
 
-  <listener>
-    <listener-class>controller.jndiExample.StartupConfiguration</listener-class>
-  </listener>
+<!--  <servlet>-->
+<!--    <servlet-name>TestServlet1</servlet-name>-->
+<!--    <servlet-class>controller/user/TestServlet</servlet-class>-->
+<!--    <load-on-startup>1</load-on-startup>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>TestServlet1</servlet-name>-->
+<!--    <url-pattern>/hello123</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>controller.user.TestServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TestJSP</servlet-name>
+    <jsp>controller.user.TestServlet</jsp>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TestJSP</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
 
 </web-app>

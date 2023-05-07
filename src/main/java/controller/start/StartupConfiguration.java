@@ -1,4 +1,4 @@
-package controller.jndiExample;
+package controller.start;
 
 import org.apache.log4j.Logger;
 import utils.DbConnector;
