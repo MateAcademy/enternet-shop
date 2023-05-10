@@ -70,14 +70,14 @@
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>TestJSP</servlet-name>
-    <jsp>controller.user.TestServlet</jsp>
-  </servlet>
+<!--  <servlet>-->
+<!--    <servlet-name>TestJSP</servlet-name>-->
+<!--    <jsp>controller.user.TestServlet</jsp>-->
+<!--  </servlet>-->
 
-  <servlet-mapping>
-    <servlet-name>TestJSP</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>TestJSP</servlet-name>-->
+<!--    <url-pattern>/hello</url-pattern>-->
+<!--  </servlet-mapping>-->
 
 </web-app>
