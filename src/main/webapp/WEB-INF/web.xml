@@ -72,12 +72,12 @@
 
   <servlet>
     <servlet-name>TestJSP</servlet-name>
-    <jsp>controller.user.TestServlet</jsp>
+    <jsp-file>/test.jsp</jsp-file>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>TestJSP</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <url-pattern>/hello-world-jsp</url-pattern>
   </servlet-mapping>
 
 </web-app>

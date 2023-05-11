@@ -1,4 +1,5 @@
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.Date, test.Human" %>
 <%--
   Created by IntelliJ IDEA.
   User: Sergey
@@ -12,39 +13,52 @@
     <title>hello world</title>
 </head>
 <body>
-
-<%
-    out.println("<p>hello88</p>");
-%>
-
-    <% String s = "путин хуйло";
-
-    out.println();
+<h1>
+    <% String name = request.getParameter("name"); %>
+    <% out.print("Hello " + name); %>
 
 
-        PrintWriter pw = response.getWriter();
-        pw.write(s);
-        pw.write(new java.util.Date().toString());
-
+    <%  Human human = new Human();
+        human.connection();
         int a = 5;
-        int b = a + 67;
-        System.out.println(b);
-        pw.flush();
-        pw.close();
-
-        PrintWriter pw2 = response.getWriter();
-        pw2.write(new java.util.Date().toString());
-        pw2.flush();
-        pw2.close();
-
-        PrintWriter pw3 = response.getWriter();
-
-        pw3.flush();
-        pw3.close();
-
-
-
+        out.println("Testing JSP --------------");
     %>
+</h1>
+<p>
+    <%="Data:" %>
+    <%=new Date() %>
+
+    <% int b = a + 5; %>
+</p>
+
+<%--    <% String s = "путин хуйло222222222222";--%>
+
+<%--    out.println();--%>
+
+
+<%--        PrintWriter pw = response.getWriter();--%>
+<%--        pw.write(s);--%>
+<%--        pw.write(new java.util.Date().toString());--%>
+
+<%--        int a = 5;--%>
+<%--        int b = a + 67;--%>
+<%--        System.out.println(b);--%>
+<%--        pw.flush();--%>
+<%--        pw.close();--%>
+
+<%--        PrintWriter pw2 = response.getWriter();--%>
+<%--        pw2.write(new java.util.Date().toString());--%>
+<%--        pw2.flush();--%>
+<%--        pw2.close();--%>
+
+<%--        PrintWriter pw3 = response.getWriter();--%>
+
+<%--        pw3.flush();--%>
+<%--        pw3.close();--%>
+
+
+
+<%--    %>--%>
 
 </body>
 </html>

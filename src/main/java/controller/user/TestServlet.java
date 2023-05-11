@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author Serhii Klunniy
@@ -14,7 +15,14 @@ import java.io.IOException;
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/test.jsp");
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+
+        PrintWriter pw = resp.getWriter();
+        pw.println("<html>");
+        pw.println("<h1> Hello + " + name + "surname " + surname + "</h1>");
+        pw.println("</html>");
+//        resp.sendRedirect("/test.jsp");
         //req.getRequestDispatcher("/test.jsp").forward(req, resp);
     }
 
