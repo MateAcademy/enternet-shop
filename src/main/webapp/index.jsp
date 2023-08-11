@@ -10,11 +10,20 @@
 
 <div style="text-align: center;">
     <h4>
+
         <%
-            String error = (String) request.getAttribute("error");
-            if (error != null) {
-                response.getWriter().write(error);
-            }
+
+        %>
+        <%!
+//            String error = (String) request.getAttribute("error");
+//            if (error != null) {
+//                response.getWriter().write(error);
+//            }
+
+
+            private int sum() {
+                return 4;
+        }
         %>
     </h4>
 
@@ -38,6 +47,8 @@
         Enter email:<input name="email" type="email"/>
         <button type="submit">Enter</button>
     </form>
+
+
 </div>
 </body>
 </html>

@@ -52,10 +52,10 @@
     </tr>
     <c:forEach var="user" items="${allUsers}">
         <tr>
-            <td><c:out value="${user.email}"/></td>
-            <td><c:out value="${user.password}"/></td>
-            <td><c:out value="${user.role}"/></td>
-            <td><c:out value="${user.available}"/></td>
+            <td><"${user.email}"/></td>
+            <td><"${user.password}"/></td>
+            <td><"${user.role}"/></td>
+            <td><"${user.available}"/></td>
 
 <%--            <td><a href='UserController?action=edit&nickname=<c:out value="${user.nickname}}"--%>
 <%--            action=edit&nickname=--%>

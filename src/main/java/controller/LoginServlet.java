@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //todo: как мне сделать при возврате на главную страницу, что бы убралось поле
 //мы сразу можем перейти на main_menu.jsp - а так не должно быть
+
         try {
             req.setCharacterEncoding("UTF-8");
             resp.setCharacterEncoding("UTF-8");

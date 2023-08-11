@@ -1,0 +1,2 @@
+2022-09-19 21:10:06 DEBUG Database:23 - UserUser(id=2, email=s.klunniy@gmail.com, password=123) add to db
+2022-09-19 21:10:13 WARN  UserDaoImpl:22 - User add to db

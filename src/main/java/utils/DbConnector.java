@@ -36,7 +36,7 @@ public class DbConnector {
 
     public static DbConnector getInstance() throws Exception {
         if (instance == null) {
-            throw new Exception("DbConnector");
+            throw new Exception("DbConnector instance == null");
         }
         return instance;
     }
